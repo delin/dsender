@@ -2,5 +2,6 @@
 *.pot
 *.pyc
 *.tmp
+*.sqlite3
 local_settings.py
 .idea/
