@@ -7,7 +7,7 @@ class MailAccount(models.Model):
     smtp_server = models.CharField(max_length=256)
     smtp_user = models.CharField(max_length=512)
     smtp_password = models.CharField(max_length=512)
-    description = models.TextField(max_length=1024)
+    description = models.TextField(max_length=1024, blank=True, null=True)
     date_create = models.DateTimeField(auto_now_add=True)
     counter = models.BigIntegerField(default=0)
     # TODO add limits
@@ -20,16 +20,16 @@ class MailAccount(models.Model):
         verbose_name = _('Mail account')
 
     def __unicode__(self):
-        return "%s on %s" % (self.smtp_user, self.smtp_server)
+        return self.smtp_user
 
 
 class MailingList(models.Model):
     email = models.EmailField(max_length=512)
     first_name = models.CharField(max_length=512)
     last_name = models.CharField(max_length=512)
-    description = models.TextField(max_length=1024)
+    description = models.TextField(max_length=1024, blank=True, null=True)
     date_create = models.DateTimeField(auto_now_add=True)
-    date_send_last = models.DateTimeField(null=True)
+    date_send_last = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = _('Mailing lists')
@@ -46,11 +46,11 @@ class Project(models.Model):
     )
 
     name = models.CharField(max_length=64)
-    description = models.TextField(max_length=1024)
-    group = models.ForeignKey(Group)
+    description = models.TextField(max_length=1024, blank=True, null=True)
+    # group = models.ForeignKey(Group)
     email_list = models.ManyToManyField(MailingList)
     date_create = models.DateTimeField(auto_now_add=True)
-    date_send_last = models.DateTimeField(null=True)
+    date_send_last = models.DateTimeField(null=True, blank=True)
     from_name = models.CharField(max_length=1024)
     from_account = models.ForeignKey(MailAccount)
     mailing_type = models.PositiveSmallIntegerField(choices=MAILING_TYPE, default=1)
@@ -60,7 +60,7 @@ class Project(models.Model):
         verbose_name = _('Project')
 
     def __unicode__(self):
-        return "%s for %s" % (self.name, self.group)
+        return self.name
 
 
 class Mailing(models.Model):
@@ -71,7 +71,7 @@ class Mailing(models.Model):
 
     subject = models.CharField(max_length=496)
     text = models.TextField()
-    content_type = models.CharField(choices=CONTENT_TYPE, max_length=64)
+    content_type = models.CharField(choices=CONTENT_TYPE, max_length=64, default=0)
     project = models.ForeignKey(Project)
     date_create = models.DateTimeField(auto_now_add=True)
 
