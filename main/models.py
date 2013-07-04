@@ -7,6 +7,8 @@ class MailAccount(models.Model):
     smtp_server = models.CharField(max_length=256)
     smtp_user = models.CharField(max_length=512)
     smtp_password = models.CharField(max_length=512)
+    smtp_port = models.PositiveSmallIntegerField(default=25)
+    smtp_use_tls = models.BooleanField(default=False)
     description = models.TextField(max_length=1024, blank=True, null=True)
     date_create = models.DateTimeField(auto_now_add=True)
     counter = models.BigIntegerField(default=0)

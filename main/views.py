@@ -1,8 +1,7 @@
-from django.contrib import messages
+from django.conf import settings as global_settings
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
-from dsender import settings
 from main.models import Project, Mailing
 
 
@@ -34,7 +33,12 @@ class StartMailing(TemplateView):
         project = mailing.project
         email_list = project.email_list.all()
 
-        settings.EMAIL_HOST = project.from_account.smtp_server
+        global_settings.EMAIL_HOST = project.from_account.smtp_server
+        global_settings.EMAIL_HOST_USER = project.from_account.smtp_user
+        global_settings.EMAIL_HOST_PASSWORD = project.from_account.smtp_password
+        global_settings.EMAIL_PORT = project.from_account.smtp_port
+        global_settings.EMAIL_USE_TLS = project.from_account.smtp_use_tls
+
         for email in email_list:
             print("Sended to ", email.email)
             send_mail(subject=mailing.subject, message=mailing.text, from_email=project.from_account.smtp_user,
