@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-03 19:27+0400\n"
+"POT-Creation-Date: 2013-07-06 02:24+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,42 +17,145 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: main/models.py:19
+#: accounts/views.py:20 templates/pages/login.html:49
+#: templates/pages/login.html.py:52
+msgid "Sign in"
+msgstr ""
+
+#: accounts/views.py:47
+msgid "This account disabled."
+msgstr ""
+
+#: accounts/views.py:49
+msgid "Wrong username or password."
+msgstr ""
+
+#: dsender/settings.py:40
+msgid "Russian"
+msgstr ""
+
+#: dsender/settings.py:41
+msgid "English"
+msgstr ""
+
+#: main/models.py:21
 msgid "Mail accounts"
 msgstr ""
 
-#: main/models.py:20
+#: main/models.py:22
 msgid "Mail account"
 msgstr ""
 
-#: main/models.py:35
+#: main/models.py:37
 msgid "Mailing lists"
 msgstr ""
 
-#: main/models.py:36
+#: main/models.py:38 templates/pages/start_mailing.html:6
 msgid "Mailing list"
 msgstr ""
 
-#: main/models.py:44
+#: main/models.py:46
 msgid "Copy"
 msgstr ""
 
-#: main/models.py:45
+#: main/models.py:47
 msgid "Private"
 msgstr ""
 
-#: main/models.py:59
+#: main/models.py:61
 msgid "Projects"
 msgstr ""
 
-#: main/models.py:60
+#: main/models.py:62
 msgid "Project"
 msgstr ""
 
-#: main/models.py:79
+#: main/models.py:82
 msgid "Mailings"
 msgstr ""
 
-#: main/models.py:80
+#: main/models.py:83
 msgid "Mailing"
+msgstr ""
+
+#: main/views.py:37 templates/pages/start_mailing.html:18
+msgid "Start mailing"
+msgstr ""
+
+#: main/views.py:75 main/views.py:82
+msgid "Select project"
+msgstr ""
+
+#: main/views.py:104
+msgid "Select message"
+msgstr ""
+
+#: main/views.py:126
+msgid "Confirm"
+msgstr ""
+
+#: main/views.py:152
+msgid "Sending"
+msgstr ""
+
+#: main/views.py:160
+msgid "Message not selected"
+msgstr ""
+
+#: main/views.py:185
+msgid "Successful"
+msgstr ""
+
+#: templates/base.html:25
+msgid "Logged in as"
+msgstr ""
+
+#: templates/base.html:26
+msgid "logout"
+msgstr ""
+
+#: templates/pages/confirm.html:6
+msgid "From"
+msgstr ""
+
+#: templates/pages/confirm.html:10
+msgid "To"
+msgstr ""
+
+#: templates/pages/confirm.html:33
+msgid "Subject"
+msgstr ""
+
+#: templates/pages/confirm.html:35
+msgid "Text"
+msgstr ""
+
+#: templates/pages/confirm.html:40
+msgid "Send"
+msgstr ""
+
+#: templates/pages/login.html:50
+msgid "Username"
+msgstr ""
+
+#: templates/pages/login.html:51
+msgid "Password"
+msgstr ""
+
+#: templates/pages/select_message.html:6 templates/pages/select_project.html:6
+msgid "Projects list"
+msgstr ""
+
+#: templates/pages/select_message.html:13
+#: templates/pages/start_mailing.html:13
+msgid "New message"
+msgstr ""
+
+#: templates/pages/select_message.html:18
+#: templates/pages/select_project.html:18
+msgid "Next"
+msgstr ""
+
+#: templates/pages/select_project.html:13
+msgid "New project"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-03 19:27+0400\n"
+"POT-Creation-Date: 2013-07-06 02:24+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,42 +19,145 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: main/models.py:19
+#: accounts/views.py:20 templates/pages/login.html:49
+#: templates/pages/login.html.py:52
+msgid "Sign in"
+msgstr "Войти"
+
+#: accounts/views.py:47
+msgid "This account disabled."
+msgstr "Этот аккаунт отключен."
+
+#: accounts/views.py:49
+msgid "Wrong username or password."
+msgstr "Ошибка при вводе имени пользователя или пароля."
+
+#: dsender/settings.py:40
+msgid "Russian"
+msgstr "Русский"
+
+#: dsender/settings.py:41
+msgid "English"
+msgstr ""
+
+#: main/models.py:21
 msgid "Mail accounts"
-msgstr ""
+msgstr "Почтовые аккаунты"
 
-#: main/models.py:20
+#: main/models.py:22
 msgid "Mail account"
-msgstr ""
+msgstr "Почтовый аккаунт"
 
-#: main/models.py:35
+#: main/models.py:37
 msgid "Mailing lists"
-msgstr ""
+msgstr "Листы рассылки"
 
-#: main/models.py:36
+#: main/models.py:38 templates/pages/start_mailing.html:6
 msgid "Mailing list"
-msgstr ""
+msgstr "Лист рассылки"
 
-#: main/models.py:44
+#: main/models.py:46
 msgid "Copy"
-msgstr ""
+msgstr "Копия"
 
-#: main/models.py:45
+#: main/models.py:47
 msgid "Private"
-msgstr ""
+msgstr "Личное"
 
-#: main/models.py:59
+#: main/models.py:61
 msgid "Projects"
-msgstr ""
+msgstr "Проекты"
 
-#: main/models.py:60
+#: main/models.py:62
 msgid "Project"
-msgstr ""
+msgstr "Проект"
 
-#: main/models.py:79
+#: main/models.py:82
 msgid "Mailings"
-msgstr ""
+msgstr "Рассылкы"
 
-#: main/models.py:80
+#: main/models.py:83
 msgid "Mailing"
-msgstr ""
+msgstr "Рассылка"
+
+#: main/views.py:37 templates/pages/start_mailing.html:18
+msgid "Start mailing"
+msgstr "Начало рассылки"
+
+#: main/views.py:75 main/views.py:82
+msgid "Select project"
+msgstr "Выбор проекта"
+
+#: main/views.py:104
+msgid "Select message"
+msgstr "Выбор сообщения"
+
+#: main/views.py:126
+msgid "Confirm"
+msgstr "Подтверждение"
+
+#: main/views.py:152
+msgid "Sending"
+msgstr "Отправка"
+
+#: main/views.py:160
+msgid "Message not selected"
+msgstr "Сообщение не выбрано"
+
+#: main/views.py:185
+msgid "Successful"
+msgstr "Успешно"
+
+#: templates/base.html:25
+msgid "Logged in as"
+msgstr "Вошли как"
+
+#: templates/base.html:26
+msgid "logout"
+msgstr "выход"
+
+#: templates/pages/confirm.html:6
+msgid "From"
+msgstr "От"
+
+#: templates/pages/confirm.html:10
+msgid "To"
+msgstr "Для"
+
+#: templates/pages/confirm.html:33
+msgid "Subject"
+msgstr "Тема"
+
+#: templates/pages/confirm.html:35
+msgid "Text"
+msgstr "Текст"
+
+#: templates/pages/confirm.html:40
+msgid "Send"
+msgstr "Отправить"
+
+#: templates/pages/login.html:50
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: templates/pages/login.html:51
+msgid "Password"
+msgstr "Пароль"
+
+#: templates/pages/select_message.html:6 templates/pages/select_project.html:6
+msgid "Projects list"
+msgstr "Список проектов"
+
+#: templates/pages/select_message.html:13
+#: templates/pages/start_mailing.html:13
+msgid "New message"
+msgstr "Новое сообщение"
+
+#: templates/pages/select_message.html:18
+#: templates/pages/select_project.html:18
+msgid "Next"
+msgstr "Далее"
+
+#: templates/pages/select_project.html:13
+msgid "New project"
+msgstr "Новый проект"

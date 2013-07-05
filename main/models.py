@@ -4,11 +4,11 @@ from django.utils.translation import ugettext as _
 
 
 class MailAccount(models.Model):
-    smtp_server = models.CharField(max_length=256)
-    smtp_user = models.CharField(max_length=512)
-    smtp_password = models.CharField(max_length=512)
-    smtp_port = models.PositiveSmallIntegerField(default=25)
-    smtp_use_tls = models.BooleanField(default=False)
+    server = models.CharField(max_length=256)
+    username = models.CharField(max_length=512)
+    password = models.CharField(max_length=512)
+    port = models.PositiveSmallIntegerField(default=25)
+    use_tls = models.BooleanField(default=False)
     description = models.TextField(max_length=1024, blank=True, null=True)
     date_create = models.DateTimeField(auto_now_add=True)
     counter = models.BigIntegerField(default=0)
@@ -22,7 +22,7 @@ class MailAccount(models.Model):
         verbose_name = _('Mail account')
 
     def __unicode__(self):
-        return self.smtp_user
+        return self.username
 
 
 class MailingList(models.Model):
@@ -49,7 +49,7 @@ class Project(models.Model):
 
     name = models.CharField(max_length=64)
     description = models.TextField(max_length=1024, blank=True, null=True)
-    # group = models.ForeignKey(Group)
+    groups = models.ManyToManyField(Group)
     email_list = models.ManyToManyField(MailingList)
     date_create = models.DateTimeField(auto_now_add=True)
     date_send_last = models.DateTimeField(null=True, blank=True)
@@ -62,7 +62,7 @@ class Project(models.Model):
         verbose_name = _('Project')
 
     def __unicode__(self):
-        return self.name
+        return "%s" % self.name
 
 
 class Mailing(models.Model):
@@ -76,6 +76,7 @@ class Mailing(models.Model):
     content_type = models.CharField(choices=CONTENT_TYPE, max_length=64, default=0)
     project = models.ForeignKey(Project)
     date_create = models.DateTimeField(auto_now_add=True)
+    # TODO Last send
 
     class Meta:
         verbose_name_plural = _('Mailings')

@@ -1,20 +1,21 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
     <form action="" method="POST" class="form-horizontal">{% csrf_token %}
         <div class="control-group">
-            <label class="control-label" for="id-mailing_list">Mailing List</label>
+            <label class="control-label" for="id-mailing_list">{% blocktrans %}Mailing list{% endblocktrans %}</label>
             <div class="controls">
                 <select name="mailing_list" id="id-mailing_list">
                     {% for mailing_list in mailing_lists reversed %}
                         <option value="{{ mailing_list.id }}">{{ mailing_list.project.name }} - {{ mailing_list.subject }}</option>
                     {% endfor %}
                 </select>
-                <a class="btn btn-info" id="id-mailing_list_add" target="_blank" href="/admin/main/mailing/add/">Add new project</a>
+                <a class="btn btn-info" id="id-mailing_list_add" target="_blank" href="/admin/main/mailing/add/">{% blocktrans %}New message{% endblocktrans %}</a>
             </div>
         </div>
         <div class="control-group">
             <div class="controls">
-                <button type="submit" class="btn">Start mailing</button>
+                <button type="submit" class="btn">{% blocktrans %}Start mailing{% endblocktrans %}</button>
             </div>
         </div>
     </form>

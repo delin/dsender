@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <form action="{% url 'confirm' %}" method="get" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="id-select_message">{% blocktrans %}Projects list{% endblocktrans %}</label>
+            <div class="controls">
+                <select name="message" id="id-select_message" class="input-xxlarge">
+                    {% for mail_message in content.mail_messages reversed %}
+                        <option value="{{ mail_message.id }}">{{ mail_message.subject }} - {{ mail_message.date_create }}</option>
+                    {% endfor %}
+                </select>
+                <a class="btn btn-info" target="_blank" href="/admin/main/mailing/add/">{% blocktrans %}New message{% endblocktrans %}</a>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">{% blocktrans %}Next{% endblocktrans %}</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

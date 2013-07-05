@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <form action="{% url 'select_message' %}" method="get" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="id-select_project">{% blocktrans %}Projects list{% endblocktrans %}</label>
+            <div class="controls">
+                <select name="project" id="id-select_project" class="input-xxlarge">
+                    {% for project in content.projects reversed %}
+                        <option value="{{ project.id }}">{{ project.name }} - {{ project.date_create }}</option>
+                    {% endfor %}
+                </select>
+                <a class="btn btn-info" target="_blank" href="/admin/main/project/add/">{% blocktrans %}New project{% endblocktrans %}</a>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">{% blocktrans %}Next{% endblocktrans %}</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

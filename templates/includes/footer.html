@@ -1,0 +1,22 @@
+{% load static %}
+{% load i18n %}
+<footer id="footer">
+    <div class="credit pull-left">
+        <span class="muted" style="text-align: center;">
+            <strong>dSender</strong> &copy;
+            <a href="mailto:delin@delin.pro" target="blank">Delin</a> 2013
+        </span>
+    </div>
+    <div class="pull-right">
+        <form name="form-lang-change" action="{% url 'set_language' %}" method="post" class="form-search">{% csrf_token %}
+            {% get_current_language as cur_lang %}
+            <select name="language" class="select-lang" onchange="this.form.submit()">
+                {% get_language_info_list for LANGUAGES as languages %}
+                {% for language in languages %}
+                    <option class="flag-icon-{{ language.code }}" value="{{ language.code }}"
+                            {% ifequal language.code cur_lang %}selected{% endifequal %}>{{ language.name_local }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+</footer>
