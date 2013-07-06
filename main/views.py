@@ -12,13 +12,13 @@ from dsender.functions import prepare_data
 from main.models import Mailing, Project
 
 
-# class Home(TemplateView):
-#     template_name = "home.html"
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(Home, self).get_context_data(**kwargs)
-#         context['title'] = "Home"
-#         return context
+class Home(TemplateView):
+    template_name = "pages/home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(Home, self).get_context_data(**kwargs)
+        context['title'] = _("Main page")
+        return context
 
 
 class StartMailing(TemplateView):
@@ -63,19 +63,6 @@ class StartMailing(TemplateView):
         return redirect('start_mailing')
 
 
-class SelectProject(TemplateView):
-    template_name = "pages/select_project.html"
-
-    c = {}
-    c.update(csrf(request))
-
-    def get_context_data(self, **kwargs):
-        context = super(SelectProject, self).get_context_data(**kwargs)
-        context['projects'] = Project.objects.filter().all()
-        context['title'] = _("Select project")
-        return context
-
-
 @login_required
 @require_http_methods(["GET"])
 def page_select_project(request):
@@ -99,6 +86,7 @@ def page_select_project(request):
 @require_http_methods(["GET"])
 def page_select_message(request):
     if 'project' not in request.GET:
+        messages.error(request, _("Project not selected"))
         return redirect('select_project')
 
     title = _("Select message") + " - 2/3"
@@ -121,6 +109,7 @@ def page_select_message(request):
 @require_http_methods(["GET"])
 def page_confirm(request):
     if 'message' not in request.GET:
+        messages.error(request, _("Message not selected"))
         return redirect('select_message')
 
     title = _("Confirm") + " - 3/3"

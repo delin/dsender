@@ -1,5 +1,20 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<!-- Add your site or application content here -->
-<p>Hello world! This is HTML5 Boilerplate. {{ test_msg }}</p>
+<div class="hero-unit">
+  <h1>{% trans "Hello" %} {{ user.first_name|default:user.username }}!</h1>
+  <p>{% blocktrans %}This service is used for mass mailing emails.{% endblocktrans %}</p>
+
+    <ol>
+        <li>{% blocktrans %}Choose a project (or create a new one).{% endblocktrans %}</li>
+        <li>{% blocktrans %}Choose the text and title of the message (or create new).{% endblocktrans %}</li>
+        <li>{% blocktrans %}Check whether all right.{% endblocktrans %}</li>
+        <li>{% blocktrans %}Send it.{% endblocktrans %}</li>
+    </ol>
+  <p>
+    <a class="btn btn-primary btn-large" href="{% url 'select_project' %}">
+        {% trans "Begin" %}
+    </a>
+  </p>
+</div>
 {% endblock %}

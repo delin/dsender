@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 09:51+0400\n"
+"POT-Creation-Date: 2013-07-06 10:23+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -162,31 +162,39 @@ msgstr ""
 msgid "Mailing"
 msgstr ""
 
+#: main/views.py:20
+msgid "Main page"
+msgstr ""
+
 #: main/views.py:37 templates/pages/start_mailing.html:18
 msgid "Start mailing"
 msgstr ""
 
-#: main/views.py:75 main/views.py:82
+#: main/views.py:69
 msgid "Select project"
 msgstr ""
 
-#: main/views.py:104
+#: main/views.py:89
+msgid "Project not selected"
+msgstr ""
+
+#: main/views.py:92
 msgid "Select message"
 msgstr ""
 
-#: main/views.py:126
-msgid "Confirm"
-msgstr ""
-
-#: main/views.py:152
-msgid "Sending"
-msgstr ""
-
-#: main/views.py:160
+#: main/views.py:112 main/views.py:149
 msgid "Message not selected"
 msgstr ""
 
-#: main/views.py:185
+#: main/views.py:115
+msgid "Confirm"
+msgstr ""
+
+#: main/views.py:141
+msgid "Sending"
+msgstr ""
+
+#: main/views.py:174
 msgid "Successful"
 msgstr ""
 
@@ -196,6 +204,10 @@ msgstr ""
 
 #: templates/base.html:26
 msgid "logout"
+msgstr ""
+
+#: templates/base.html:30
+msgid "New mailing"
 msgstr ""
 
 #: templates/pages/confirm.html:6
@@ -208,6 +220,34 @@ msgstr ""
 
 #: templates/pages/confirm.html:40
 msgid "Send"
+msgstr ""
+
+#: templates/pages/home.html:5
+msgid "Hello"
+msgstr ""
+
+#: templates/pages/home.html:6
+msgid "This service is used for mass mailing emails."
+msgstr ""
+
+#: templates/pages/home.html:9
+msgid "Choose a project (or create a new one)."
+msgstr ""
+
+#: templates/pages/home.html:10
+msgid "Choose the text and title of the message (or create new)."
+msgstr ""
+
+#: templates/pages/home.html:11
+msgid "Check whether all right."
+msgstr ""
+
+#: templates/pages/home.html:12
+msgid "Send it."
+msgstr ""
+
+#: templates/pages/home.html:16
+msgid "Begin"
 msgstr ""
 
 #: templates/pages/select_message.html:6 templates/pages/select_project.html:6

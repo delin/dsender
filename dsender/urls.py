@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from dsender.settings import MEDIA_ROOT, DEBUG
-from main.views import StartMailing
+from main.views import StartMailing, Home
 
 admin.autodiscover()
 
@@ -19,7 +19,7 @@ else:
     urlpatterns = patterns('', )
 
 urlpatterns += patterns('',
-    url(r'^$', StartMailing.as_view(), name='start_mailing'),
+    url(r'^$', Home.as_view(), name='home'),
 
     url(r'^select_project/', 'main.views.page_select_project', name='select_project'),
     url(r'^select_message/', 'main.views.page_select_message', name='select_message'),

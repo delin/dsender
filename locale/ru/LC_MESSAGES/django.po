@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 09:51+0400\n"
+"POT-Creation-Date: 2013-07-06 10:23+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -164,31 +164,39 @@ msgstr "Рассылкы"
 msgid "Mailing"
 msgstr "Рассылка"
 
+#: main/views.py:20
+msgid "Main page"
+msgstr "Главная"
+
 #: main/views.py:37 templates/pages/start_mailing.html:18
 msgid "Start mailing"
 msgstr "Начало рассылки"
 
-#: main/views.py:75 main/views.py:82
+#: main/views.py:69
 msgid "Select project"
 msgstr "Выбор проекта"
 
-#: main/views.py:104
+#: main/views.py:89
+msgid "Project not selected"
+msgstr "Проект не выбрано"
+
+#: main/views.py:92
 msgid "Select message"
 msgstr "Выбор сообщения"
 
-#: main/views.py:126
-msgid "Confirm"
-msgstr "Подтверждение"
-
-#: main/views.py:152
-msgid "Sending"
-msgstr "Отправка"
-
-#: main/views.py:160
+#: main/views.py:112 main/views.py:149
 msgid "Message not selected"
 msgstr "Сообщение не выбрано"
 
-#: main/views.py:185
+#: main/views.py:115
+msgid "Confirm"
+msgstr "Подтверждение"
+
+#: main/views.py:141
+msgid "Sending"
+msgstr "Отправка"
+
+#: main/views.py:174
 msgid "Successful"
 msgstr "Успешно"
 
@@ -199,6 +207,10 @@ msgstr "Вошли как"
 #: templates/base.html:26
 msgid "logout"
 msgstr "выход"
+
+#: templates/base.html:30
+msgid "New mailing"
+msgstr "Новая рассылка"
 
 #: templates/pages/confirm.html:6
 msgid "From"
@@ -211,6 +223,34 @@ msgstr "Для"
 #: templates/pages/confirm.html:40
 msgid "Send"
 msgstr "Отправить"
+
+#: templates/pages/home.html:5
+msgid "Hello"
+msgstr "Привет"
+
+#: templates/pages/home.html:6
+msgid "This service is used for mass mailing emails."
+msgstr "Этот сервис служит для массовой рассылке писем."
+
+#: templates/pages/home.html:9
+msgid "Choose a project (or create a new one)."
+msgstr "Выбирай проект (либо создай новый)."
+
+#: templates/pages/home.html:10
+msgid "Choose the text and title of the message (or create new)."
+msgstr "Выбирай текст и название сообщения (либо создай новое)."
+
+#: templates/pages/home.html:11
+msgid "Check whether all right."
+msgstr "Проверь всё ли верно."
+
+#: templates/pages/home.html:12
+msgid "Send it."
+msgstr "Отправляй."
+
+#: templates/pages/home.html:16
+msgid "Begin"
+msgstr "Начать"
 
 #: templates/pages/select_message.html:6 templates/pages/select_project.html:6
 msgid "Projects list"
