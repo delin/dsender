@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 10:23+0400\n"
+"POT-Creation-Date: 2013-07-06 13:33+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,10 +61,12 @@ msgid "Use TLS"
 msgstr "Использовать TLS"
 
 #: main/models.py:12 main/models.py:32 main/models.py:51
+#: templates/pages/select_message.html:14
 msgid "Description"
 msgstr "Описание"
 
 #: main/models.py:13 main/models.py:33 main/models.py:54 main/models.py:78
+#: templates/pages/select_message.html:17
 msgid "Date of creating"
 msgstr "Дата создания"
 
@@ -92,7 +94,7 @@ msgstr "Имя"
 msgid "Last name"
 msgstr "Фамилия"
 
-#: main/models.py:34 main/models.py:55
+#: main/models.py:34 main/models.py:55 templates/pages/select_message.html:20
 msgid "Date of last send"
 msgstr "Дата последней отправки"
 
@@ -100,7 +102,8 @@ msgstr "Дата последней отправки"
 msgid "Mailing lists"
 msgstr "Листы рассылки"
 
-#: main/models.py:38 templates/pages/start_mailing.html:6
+#: main/models.py:38 templates/pages/confirm.html:28
+#: templates/pages/select_message.html:52 templates/pages/start_mailing.html:6
 msgid "Mailing list"
 msgstr "Лист рассылки"
 
@@ -132,7 +135,7 @@ msgstr "От имени"
 msgid "From account"
 msgstr "От аккаунта"
 
-#: main/models.py:58
+#: main/models.py:58 templates/pages/select_message.html:28
 msgid "Mailing type"
 msgstr "Тип рассылки"
 
@@ -140,15 +143,15 @@ msgstr "Тип рассылки"
 msgid "Projects"
 msgstr "Проекты"
 
-#: main/models.py:62 main/models.py:77
+#: main/models.py:62 main/models.py:77 templates/pages/select_message.html:11
 msgid "Project"
 msgstr "Проект"
 
-#: main/models.py:74 templates/pages/confirm.html:33
+#: main/models.py:74 templates/pages/confirm.html:11
 msgid "Subject"
 msgstr "Тема"
 
-#: main/models.py:75 templates/pages/confirm.html:35
+#: main/models.py:75 templates/pages/confirm.html:13
 msgid "Text"
 msgstr "Текст"
 
@@ -168,35 +171,27 @@ msgstr "Рассылка"
 msgid "Main page"
 msgstr "Главная"
 
-#: main/views.py:37 templates/pages/start_mailing.html:18
-msgid "Start mailing"
-msgstr "Начало рассылки"
-
-#: main/views.py:69
+#: main/views.py:27
 msgid "Select project"
 msgstr "Выбор проекта"
 
-#: main/views.py:89
+#: main/views.py:47
 msgid "Project not selected"
 msgstr "Проект не выбрано"
 
-#: main/views.py:92
+#: main/views.py:50
 msgid "Select message"
 msgstr "Выбор сообщения"
 
-#: main/views.py:112 main/views.py:149
+#: main/views.py:77 main/views.py:107
 msgid "Message not selected"
 msgstr "Сообщение не выбрано"
 
-#: main/views.py:115
+#: main/views.py:80
 msgid "Confirm"
 msgstr "Подтверждение"
 
-#: main/views.py:141
-msgid "Sending"
-msgstr "Отправка"
-
-#: main/views.py:174
+#: main/views.py:132
 msgid "Successful"
 msgstr "Успешно"
 
@@ -212,15 +207,11 @@ msgstr "выход"
 msgid "New mailing"
 msgstr "Новая рассылка"
 
-#: templates/pages/confirm.html:6
+#: templates/pages/confirm.html:7 templates/pages/select_message.html:23
 msgid "From"
 msgstr "От"
 
-#: templates/pages/confirm.html:10
-msgid "To"
-msgstr "Для"
-
-#: templates/pages/confirm.html:40
+#: templates/pages/confirm.html:20
 msgid "Send"
 msgstr "Отправить"
 
@@ -252,20 +243,36 @@ msgstr "Отправляй."
 msgid "Begin"
 msgstr "Начать"
 
-#: templates/pages/select_message.html:6 templates/pages/select_project.html:6
-msgid "Projects list"
-msgstr "Список проектов"
+#: templates/pages/select_message.html:8
+msgid "After adding a new message refresh the page."
+msgstr "После добавления нового сообщения обновите страницу."
 
-#: templates/pages/select_message.html:13
+#: templates/pages/select_message.html:34
+msgid "Messages list"
+msgstr "Список сообщений"
+
+#: templates/pages/select_message.html:41
 #: templates/pages/start_mailing.html:13
 msgid "New message"
 msgstr "Новое сообщение"
 
-#: templates/pages/select_message.html:18
-#: templates/pages/select_project.html:18
+#: templates/pages/select_message.html:46
+#: templates/pages/select_project.html:22
 msgid "Next"
 msgstr "Далее"
 
-#: templates/pages/select_project.html:13
+#: templates/pages/select_project.html:6
+msgid "After adding a new project refresh the page."
+msgstr "После добавления нового проекта обновите страницу."
+
+#: templates/pages/select_project.html:10
+msgid "Projects list"
+msgstr "Список проектов"
+
+#: templates/pages/select_project.html:17
 msgid "New project"
 msgstr "Новый проект"
+
+#: templates/pages/start_mailing.html:18
+msgid "Start mailing"
+msgstr "Начало рассылки"

@@ -1,45 +1,37 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
-    <form action="{% url 'send' %}" method="post" class="form-horizontal">{% csrf_token %}
-        <dl class="dl-horizontal">
-          <dt>{% trans "From" %}:</dt>
-          <dd>{{ content.mail_message.project.from_name }}
-              &lt;<a target="_blank" href="mailto:{{ content.mail_message.project.from_account.username }}">{{ content.mail_message.project.from_account.username }}</a>&gt;
-          </dd>
-          <dt>{% trans "To" %}:</dt>
-          <dd>
-                <table class="table table-hover table-condensed">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for email in content.to_emails %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ email.first_name }}</td>
-                            <td>{{ email.last_name }}</td>
-                            <td><a target="_blank" href="mailto:{{ email.email }}">{{ email.email }}</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-          </dd>
-          <dt>{% trans "Subject" %}:</dt>
-          <dd><pre>{{ content.mail_message.subject }}</pre></dd>
-          <dt>{% trans "Text" %}:</dt>
-          <dd><pre>{{ content.mail_message.text }}</pre></dd>
-        </dl>
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn">{% blocktrans %}Send{% endblocktrans %}</button>
-            </div>
+    <div class="row-fluid">
+        <div class="span9">
+            <dl class="dl-horizontal">
+              <dt>{% trans "From" %}:</dt>
+              <dd>{{ content.mail_message.project.from_name }}
+                  &lt;<a target="_blank" href="mailto:{{ content.mail_message.project.from_account.username }}">{{ content.mail_message.project.from_account.username }}</a>&gt;
+              </dd>
+              <dt>{% trans "Subject" %}:</dt>
+              <dd>{{ content.mail_message.subject }}</dd>
+              <dt>{% trans "Text" %}:</dt>
+              <dd>
+                  {% ifequal content.mail_message.content_type "plain" %}<pre>{{ content.mail_message.text }}</pre>
+                  {% else %}{% autoescape off %}{{ content.mail_message.text }}{% endautoescape %}{% endifequal %}
+              </dd>
+            </dl>
+            <hr>
+            <form action="{% url 'send' %}" method="post" class="form-horizontal">{% csrf_token %}
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">{% blocktrans %}Send{% endblocktrans %}</button>
+                    </div>
+                </div>
+
+                <input type="hidden" name="message" value="{{ content.mail_message.id }}"/>
+            </form>
         </div>
-        <input type="hidden" name="message" value="{{ content.mail_message.id }}"/>
-    </form>
+        <div class="span3 well well-small">
+            <h5>{% blocktrans %}Mailing list{% endblocktrans %}:</h5>
+            <ol>
+                {% for email in content.to_emails %}<li>{{ email.first_name }} {{ email.last_name }} &lt;<a target="_blank" href="mailto:{{ email.email }}">{{ email.email }}</a>&gt;</li>{% endfor %}
+            </ol>
+        </div>
+    </div>
 {% endblock %}

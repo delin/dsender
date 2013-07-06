@@ -1,22 +1,58 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
-    <form action="{% url 'confirm' %}" method="get" class="form-horizontal">
-        <div class="control-group">
-            <label class="control-label" for="id-select_message">{% blocktrans %}Projects list{% endblocktrans %}</label>
-            <div class="controls">
-                <select name="message" id="id-select_message" class="input-xxlarge">
-                    {% for mail_message in content.mail_messages reversed %}
-                        <option value="{{ mail_message.id }}">{{ mail_message.subject }} - {{ mail_message.date_create }}</option>
-                    {% endfor %}
-                </select>
-                <a class="btn btn-info" target="_blank" href="/admin/main/mailing/add/">{% blocktrans %}New message{% endblocktrans %}</a>
+    <div class="row-fluid">
+        <div class="span9">
+            <div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {% blocktrans %}After adding a new message refresh the page.{% endblocktrans %}
             </div>
+            <dl class="dl-horizontal">
+                <dt>{% trans "Project" %}:</dt>
+                <dd>{{ content.project.name }}</dd>
+
+                <dt>{% trans "Description" %}:</dt>
+                <dd>{{ content.project.description|default:"<span class='muted'>---</span>" }}</dd>
+
+                <dt>{% trans "Date of creating" %}:</dt>
+                <dd>{{ content.project.date_create }}</dd>
+
+                <dt>{% trans "Date of last send" %}:</dt>
+                <dd>{{ content.project.date_send_last|default:"<span class='muted'>---</span>" }}</dd>
+
+                <dt>{% trans "From" %}:</dt>
+                <dd>{{ content.project.from_name }}
+                  &lt;<a target="_blank" href="mailto:{{ content.project.from_account.username }}">{{ content.project.from_account.username }}</a>&gt;
+                </dd>
+
+                <dt>{% trans "Mailing type" %}:</dt>
+                <dd>{{ content.project.get_mailing_type_display|default:"<span class='muted'>---</span>" }}</dd>
+            </dl>
+            <hr>
+            <form action="{% url 'confirm' %}" method="get" class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label" for="id-select_message">{% blocktrans %}Messages list{% endblocktrans %}</label>
+                    <div class="controls">
+                        <select name="message" id="id-select_message" class="input-xxlarge">
+                            {% for mail_message in content.mail_messages reversed %}
+                                <option value="{{ mail_message.id }}">{{ mail_message.subject }} - {{ mail_message.date_create }}</option>
+                            {% endfor %}
+                        </select>
+                        <a class="btn btn-info" target="_blank" href="/admin/main/mailing/add/">{% blocktrans %}New message{% endblocktrans %}</a>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn">{% blocktrans %}Next{% endblocktrans %}</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn">{% blocktrans %}Next{% endblocktrans %}</button>
-            </div>
+        <div class="span3 well well-small">
+            <h5>{% blocktrans %}Mailing list{% endblocktrans %}:</h5>
+            <ol>
+                {% for email in content.to_emails %}<li>{{ email.first_name }} {{ email.last_name }} &lt;<a target="_blank" href="mailto:{{ email.email }}">{{ email.email }}</a>&gt;</li>{% endfor %}
+            </ol>
         </div>
-    </form>
+    </div>
 {% endblock %}

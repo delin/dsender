@@ -21,7 +21,7 @@ class MailAccount(models.Model):
         verbose_name_plural = _('Mail accounts')
         verbose_name = _('Mail account')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.username
 
 
@@ -37,7 +37,7 @@ class MailingList(models.Model):
         verbose_name_plural = _('Mailing lists')
         verbose_name = _('Mailing list')
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s <%s>" % (self.first_name, self.last_name, self.email)
 
 
@@ -61,14 +61,14 @@ class Project(models.Model):
         verbose_name_plural = _('Projects')
         verbose_name = _('Project')
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s" % self.name
 
 
 class Mailing(models.Model):
     CONTENT_TYPE = (
-        ('text/plain', 'Text'),
-        ('text/html', 'HTML')
+        ('plain', 'Text'),
+        ('html', 'HTML')
     )
 
     subject = models.CharField(verbose_name=_("Subject"), max_length=496)
@@ -82,5 +82,5 @@ class Mailing(models.Model):
         verbose_name_plural = _('Mailings')
         verbose_name = _('Mailing')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.subject
