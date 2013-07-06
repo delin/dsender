@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from dsender.settings import MEDIA_ROOT, DEBUG
-from main.views import StartMailing, Home
+from main.views import Home
 
 admin.autodiscover()
 

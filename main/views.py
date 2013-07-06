@@ -21,48 +21,6 @@ class Home(TemplateView):
         return context
 
 
-class StartMailing(TemplateView):
-    template_name = "pages/start_mailing.html"
-
-    c = {}
-    c.update(csrf(request))
-
-    # def get(self, request, *args, **kwargs):
-    #     if not request.user.is_authenticated():
-    #         return redirect('login')
-
-    def get_context_data(self, **kwargs):
-        context = super(StartMailing, self).get_context_data(**kwargs)
-        context['mailing_lists'] = Mailing.objects.all()[:10]
-        context['title'] = _("Start mailing")
-        return context
-
-    def post(self, request, *args, **kwargs):
-        if not request.POST['mailing_list']:
-            return redirect('start_mailing')
-
-        mailing_list = request.POST['mailing_list']
-
-        mailing = Mailing.objects.get(id=mailing_list)
-        project = mailing.project
-        email_list = project.email_list.all()
-
-        global_settings.EMAIL_HOST = project.from_account.server
-        global_settings.EMAIL_HOST_USER = project.from_account.username
-        global_settings.EMAIL_HOST_PASSWORD = project.from_account.password
-        global_settings.EMAIL_PORT = project.from_account.port
-        global_settings.EMAIL_USE_TLS = project.from_account.use_tls
-
-        for email in email_list:
-            send_mail(subject=mailing.subject,
-                      message=mailing.text,
-                      from_email=project.from_account.username,
-                      recipient_list=[email.email],
-                      fail_silently=False)
-
-        return redirect('start_mailing')
-
-
 @login_required
 @require_http_methods(["GET"])
 def page_select_project(request):
