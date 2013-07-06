@@ -4,14 +4,14 @@ from django.utils.translation import ugettext as _
 
 
 class MailAccount(models.Model):
-    server = models.CharField(max_length=256)
-    username = models.CharField(max_length=512)
-    password = models.CharField(max_length=512)
-    port = models.PositiveSmallIntegerField(default=25)
-    use_tls = models.BooleanField(default=False)
-    description = models.TextField(max_length=1024, blank=True, null=True)
-    date_create = models.DateTimeField(auto_now_add=True)
-    counter = models.BigIntegerField(default=0)
+    server = models.CharField(verbose_name=_("Server"), max_length=256)
+    username = models.CharField(verbose_name=_("Username"), max_length=512)
+    password = models.CharField(verbose_name=_("Password"), max_length=512)
+    port = models.PositiveSmallIntegerField(verbose_name=_("Port"), default=25)
+    use_tls = models.BooleanField(verbose_name=_("Use TLS"), default=False)
+    description = models.TextField(verbose_name=_("Description"), max_length=1024, blank=True, null=True)
+    date_create = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
+    counter = models.BigIntegerField(verbose_name=_("Counter"), default=0)
     # TODO add limits
     # limit_hours = models.PositiveIntegerField(default=0)
     # limit_daily = models.PositiveIntegerField(default=0)
@@ -26,12 +26,12 @@ class MailAccount(models.Model):
 
 
 class MailingList(models.Model):
-    email = models.EmailField(max_length=512)
-    first_name = models.CharField(max_length=512)
-    last_name = models.CharField(max_length=512)
-    description = models.TextField(max_length=1024, blank=True, null=True)
-    date_create = models.DateTimeField(auto_now_add=True)
-    date_send_last = models.DateTimeField(null=True, blank=True)
+    email = models.EmailField(verbose_name=_("Email"), max_length=512)
+    first_name = models.CharField(verbose_name=_("First name"), max_length=512)
+    last_name = models.CharField(verbose_name=_("Last name"), max_length=512)
+    description = models.TextField(verbose_name=_("Description"), max_length=1024, blank=True, null=True)
+    date_create = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
+    date_send_last = models.DateTimeField(verbose_name=_("Date of last send"), null=True, blank=True)
 
     class Meta:
         verbose_name_plural = _('Mailing lists')
@@ -47,15 +47,15 @@ class Project(models.Model):
         (1, _('Private'))
     )
 
-    name = models.CharField(max_length=64)
-    description = models.TextField(max_length=1024, blank=True, null=True)
-    groups = models.ManyToManyField(Group)
-    email_list = models.ManyToManyField(MailingList)
-    date_create = models.DateTimeField(auto_now_add=True)
-    date_send_last = models.DateTimeField(null=True, blank=True)
-    from_name = models.CharField(max_length=1024)
-    from_account = models.ForeignKey(MailAccount)
-    mailing_type = models.PositiveSmallIntegerField(choices=MAILING_TYPE, default=1)
+    name = models.CharField(verbose_name=_("Name"), max_length=64)
+    description = models.TextField(verbose_name=_("Description"), max_length=1024, blank=True, null=True)
+    groups = models.ManyToManyField(Group, verbose_name=_("Groups"))
+    email_list = models.ManyToManyField(MailingList, verbose_name=_("Emails list"))
+    date_create = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
+    date_send_last = models.DateTimeField(verbose_name=_("Date of last send"), null=True, blank=True)
+    from_name = models.CharField(verbose_name=_("From name"), max_length=1024)
+    from_account = models.ForeignKey(MailAccount, verbose_name=_("From account"))
+    mailing_type = models.PositiveSmallIntegerField(verbose_name=_("Mailing type"), choices=MAILING_TYPE, default=1)
 
     class Meta:
         verbose_name_plural = _('Projects')
@@ -71,11 +71,11 @@ class Mailing(models.Model):
         ('text/html', 'HTML')
     )
 
-    subject = models.CharField(max_length=496)
-    text = models.TextField()
-    content_type = models.CharField(choices=CONTENT_TYPE, max_length=64, default=0)
-    project = models.ForeignKey(Project)
-    date_create = models.DateTimeField(auto_now_add=True)
+    subject = models.CharField(verbose_name=_("Subject"), max_length=496)
+    text = models.TextField(verbose_name=_("Text"))
+    content_type = models.CharField(verbose_name=_("Content type"), choices=CONTENT_TYPE, max_length=64, default=0)
+    project = models.ForeignKey(Project, verbose_name=_("Project"))
+    date_create = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
     # TODO Last send
 
     class Meta:

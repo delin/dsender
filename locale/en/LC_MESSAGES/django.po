@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 02:24+0400\n"
+"POT-Creation-Date: 2013-07-06 09:51+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,12 +38,60 @@ msgstr ""
 msgid "English"
 msgstr ""
 
+#: main/models.py:7
+msgid "Server"
+msgstr ""
+
+#: main/models.py:8 templates/pages/login.html:50
+msgid "Username"
+msgstr ""
+
+#: main/models.py:9 templates/pages/login.html:51
+msgid "Password"
+msgstr ""
+
+#: main/models.py:10
+msgid "Port"
+msgstr ""
+
+#: main/models.py:11
+msgid "Use TLS"
+msgstr ""
+
+#: main/models.py:12 main/models.py:32 main/models.py:51
+msgid "Description"
+msgstr ""
+
+#: main/models.py:13 main/models.py:33 main/models.py:54 main/models.py:78
+msgid "Date of creating"
+msgstr ""
+
+#: main/models.py:14
+msgid "Counter"
+msgstr ""
+
 #: main/models.py:21
 msgid "Mail accounts"
 msgstr ""
 
 #: main/models.py:22
 msgid "Mail account"
+msgstr ""
+
+#: main/models.py:29
+msgid "Email"
+msgstr ""
+
+#: main/models.py:30
+msgid "First name"
+msgstr ""
+
+#: main/models.py:31
+msgid "Last name"
+msgstr ""
+
+#: main/models.py:34 main/models.py:55
+msgid "Date of last send"
 msgstr ""
 
 #: main/models.py:37
@@ -62,12 +110,48 @@ msgstr ""
 msgid "Private"
 msgstr ""
 
+#: main/models.py:50
+msgid "Name"
+msgstr ""
+
+#: main/models.py:52
+msgid "Groups"
+msgstr ""
+
+#: main/models.py:53
+msgid "Emails list"
+msgstr ""
+
+#: main/models.py:56
+msgid "From name"
+msgstr ""
+
+#: main/models.py:57
+msgid "From account"
+msgstr ""
+
+#: main/models.py:58
+msgid "Mailing type"
+msgstr ""
+
 #: main/models.py:61
 msgid "Projects"
 msgstr ""
 
-#: main/models.py:62
+#: main/models.py:62 main/models.py:77
 msgid "Project"
+msgstr ""
+
+#: main/models.py:74 templates/pages/confirm.html:33
+msgid "Subject"
+msgstr ""
+
+#: main/models.py:75 templates/pages/confirm.html:35
+msgid "Text"
+msgstr ""
+
+#: main/models.py:76
+msgid "Content type"
 msgstr ""
 
 #: main/models.py:82
@@ -122,24 +206,8 @@ msgstr ""
 msgid "To"
 msgstr ""
 
-#: templates/pages/confirm.html:33
-msgid "Subject"
-msgstr ""
-
-#: templates/pages/confirm.html:35
-msgid "Text"
-msgstr ""
-
 #: templates/pages/confirm.html:40
 msgid "Send"
-msgstr ""
-
-#: templates/pages/login.html:50
-msgid "Username"
-msgstr ""
-
-#: templates/pages/login.html:51
-msgid "Password"
 msgstr ""
 
 #: templates/pages/select_message.html:6 templates/pages/select_project.html:6

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 02:24+0400\n"
+"POT-Creation-Date: 2013-07-06 09:51+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,6 +40,38 @@ msgstr "Русский"
 msgid "English"
 msgstr ""
 
+#: main/models.py:7
+msgid "Server"
+msgstr "Сервер"
+
+#: main/models.py:8 templates/pages/login.html:50
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: main/models.py:9 templates/pages/login.html:51
+msgid "Password"
+msgstr "Пароль"
+
+#: main/models.py:10
+msgid "Port"
+msgstr "Порт"
+
+#: main/models.py:11
+msgid "Use TLS"
+msgstr "Использовать TLS"
+
+#: main/models.py:12 main/models.py:32 main/models.py:51
+msgid "Description"
+msgstr "Описание"
+
+#: main/models.py:13 main/models.py:33 main/models.py:54 main/models.py:78
+msgid "Date of creating"
+msgstr "Дата создания"
+
+#: main/models.py:14
+msgid "Counter"
+msgstr "Счётчик"
+
 #: main/models.py:21
 msgid "Mail accounts"
 msgstr "Почтовые аккаунты"
@@ -47,6 +79,22 @@ msgstr "Почтовые аккаунты"
 #: main/models.py:22
 msgid "Mail account"
 msgstr "Почтовый аккаунт"
+
+#: main/models.py:29
+msgid "Email"
+msgstr "Почта"
+
+#: main/models.py:30
+msgid "First name"
+msgstr "Имя"
+
+#: main/models.py:31
+msgid "Last name"
+msgstr "Фамилия"
+
+#: main/models.py:34 main/models.py:55
+msgid "Date of last send"
+msgstr "Дата последней отправки"
 
 #: main/models.py:37
 msgid "Mailing lists"
@@ -64,13 +112,49 @@ msgstr "Копия"
 msgid "Private"
 msgstr "Личное"
 
+#: main/models.py:50
+msgid "Name"
+msgstr "Название"
+
+#: main/models.py:52
+msgid "Groups"
+msgstr "Группы"
+
+#: main/models.py:53
+msgid "Emails list"
+msgstr "Лист рассылки"
+
+#: main/models.py:56
+msgid "From name"
+msgstr "От имени"
+
+#: main/models.py:57
+msgid "From account"
+msgstr "От аккаунта"
+
+#: main/models.py:58
+msgid "Mailing type"
+msgstr "Тип рассылки"
+
 #: main/models.py:61
 msgid "Projects"
 msgstr "Проекты"
 
-#: main/models.py:62
+#: main/models.py:62 main/models.py:77
 msgid "Project"
 msgstr "Проект"
+
+#: main/models.py:74 templates/pages/confirm.html:33
+msgid "Subject"
+msgstr "Тема"
+
+#: main/models.py:75 templates/pages/confirm.html:35
+msgid "Text"
+msgstr "Текст"
+
+#: main/models.py:76
+msgid "Content type"
+msgstr "Тип письма"
 
 #: main/models.py:82
 msgid "Mailings"
@@ -124,25 +208,9 @@ msgstr "От"
 msgid "To"
 msgstr "Для"
 
-#: templates/pages/confirm.html:33
-msgid "Subject"
-msgstr "Тема"
-
-#: templates/pages/confirm.html:35
-msgid "Text"
-msgstr "Текст"
-
 #: templates/pages/confirm.html:40
 msgid "Send"
 msgstr "Отправить"
-
-#: templates/pages/login.html:50
-msgid "Username"
-msgstr "Имя пользователя"
-
-#: templates/pages/login.html:51
-msgid "Password"
-msgstr "Пароль"
 
 #: templates/pages/select_message.html:6 templates/pages/select_project.html:6
 msgid "Projects list"
