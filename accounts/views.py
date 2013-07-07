@@ -17,7 +17,6 @@ def page_login(request):
         return redirect('home', permanent=False)
 
     data = prepare_data(request)
-    page_title = _("Sign in")
     content = {
         'next': "/",
     }
@@ -49,8 +48,8 @@ def page_login(request):
                 messages.error(request, _("Wrong username or password."))
 
     return render(request, 'pages/login.html', {
+        'title': _("Sign in"),
         'data': data,
-        'page_title': page_title,
         'content': content
     })
 

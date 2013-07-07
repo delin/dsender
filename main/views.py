@@ -1,31 +1,33 @@
+from itertools import count
 from django.conf import settings as global_settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core import mail
 from django.core.context_processors import csrf
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
-from django.views.generic import TemplateView
 from django.utils.translation import ugettext as _
+from smtplib import SMTPException
 from dsender.functions import prepare_data
-from main.models import Mailing, Project
+from main.models import Message, Project, Group, MailAccount, Log
 
 
-class Home(TemplateView):
-    template_name = "pages/home.html"
+@login_required
+@require_http_methods(["GET"])
+def page_home(request):
+    data = prepare_data(request)
 
-    def get_context_data(self, **kwargs):
-        context = super(Home, self).get_context_data(**kwargs)
-        context['title'] = _("Main page")
-        return context
+    return render(request, "pages/home.html", {
+        'title': _("Main page"),
+        'data': data,
+    })
 
 
 @login_required
 @require_http_methods(["GET"])
 def page_select_project(request):
-    title = _("Select project") + " - 1/3"
-
     data = prepare_data(request)
     projects = Project.objects.all()
 
@@ -34,8 +36,36 @@ def page_select_project(request):
     }
 
     return render(request, "pages/select_project.html", {
+        'title': _("Select project") + " - 1/3",
         'data': data,
-        'title': title,
+        'content': content
+    })
+
+
+@login_required
+@require_http_methods(["GET"])
+def page_select_group(request):
+    if 'project' not in request.GET:
+        messages.error(request, _("Project not selected"))
+        return redirect('select_project')
+
+    try:
+        project = Project.objects.get(id=request.GET['project'])
+    except Project.DoesNotExist as error_message:
+        messages.error(request, error_message)
+        return redirect('select_project')
+
+    data = prepare_data(request)
+    groups = Group.objects.filter(project=project)
+
+    content = {
+        'groups': groups,
+        'project': project,
+    }
+
+    return render(request, "pages/select_group.html", {
+        'title': _("Select group") + " - 2/3",
+        'data': data,
         'content': content
     })
 
@@ -43,29 +73,29 @@ def page_select_project(request):
 @login_required
 @require_http_methods(["GET"])
 def page_select_message(request):
-    if 'project' not in request.GET:
-        messages.error(request, _("Project not selected"))
-        return redirect('select_project')
+    if 'group' not in request.GET:
+        messages.error(request, _("Group not selected"))
+        return redirect('select_group')
 
-    title = _("Select message") + " - 2/3"
-
-    data = prepare_data(request)
-    mail_messages = Mailing.objects.filter(project=request.GET['project'])
     try:
-        project = Project.objects.get(id=request.GET['project'])
+        group = Group.objects.get(id=request.GET['group'])
     except Project.DoesNotExist as error_message:
         messages.error(request, error_message)
-        return redirect('select_project')
+        return redirect('select_group')
+
+    data = prepare_data(request)
+    mail_messages = Message.objects.filter(group=group)
 
     content = {
+        'group': group,
         'mail_messages': mail_messages,
-        'project': project,
-        'to_emails': project.email_list.all()
+        'project': group.project,
+        'to_emails': group.clients.all()
     }
 
     return render(request, "pages/select_message.html", {
+        'title': _("Select message") + " - 2/3",
         'data': data,
-        'title': title,
         'content': content
     })
 
@@ -78,27 +108,26 @@ def page_confirm(request):
         messages.error(request, _("Message not selected"))
         return redirect('select_message')
 
-    title = _("Confirm") + " - 3/3"
-
-    data = prepare_data(request)
+    try:
+        message = Message.objects.get(id=request.GET['message'])
+    except Project.DoesNotExist as error_message:
+        messages.error(request, error_message)
+        return redirect('select_group')
 
     c = {}
     c.update(csrf(request))
-
-    try:
-        mail_message = Mailing.objects.get(id=int(request.GET['message']))
-    except Mailing.DoesNotExist as error_message:
-        messages.error(request, error_message)
-        return redirect('select_message')
+    data = prepare_data(request)
 
     content = {
-        'mail_message': mail_message,
-        'to_emails': mail_message.project.email_list.all()
+        'mail_message': message,
+        'project': message.group.project,
+        'group': message.group,
+        'to_emails': message.group.clients.all()
     }
 
     return render(request, "pages/confirm.html", {
+        'title': _("Confirm") + " - 3/3",
         'data': data,
-        'title': title,
         'content': content
     })
 
@@ -115,13 +144,14 @@ def page_send(request):
     c.update(csrf(request))
 
     try:
-        mail_message = Mailing.objects.get(id=int(request.POST['message']))
-    except Mailing.DoesNotExist as error_message:
+        mail_message = Message.objects.get(id=int(request.POST['message']))
+    except Message.DoesNotExist as error_message:
         messages.error(request, error_message)
         return redirect('select_message')
 
-    project = mail_message.project
-    email_list = project.email_list.all()
+    group = mail_message.group
+    project = group.project
+    clients = group.clients.all()
 
     global_settings.EMAIL_HOST = project.from_account.server
     global_settings.EMAIL_HOST_USER = project.from_account.username
@@ -129,21 +159,50 @@ def page_send(request):
     global_settings.EMAIL_PORT = project.from_account.port
     global_settings.EMAIL_USE_TLS = project.from_account.use_tls
 
-    if project.mailing_type == 0:
+    try:
+        connection = mail.get_connection()
+        connection.open()
+    except SMTPException as error_message:
+        messages.error(request, error_message)
+        return redirect('home')
+
+    email_message_array = []
+    if group.mailing_type == 0:
         emails_array = []
-        for email in email_list:
-            emails_array.append(email.email)
+        for client in clients:
+            emails_array.append(client.email)
+            Log.objects.create(action=0, user=request.user, from_account=project.from_account, from_project=project,
+                               from_group=group, message=mail_message, client=client)
 
-        msg = EmailMessage(mail_message.subject, mail_message.text, project.from_account.username, emails_array)
+        msg = mail.EmailMessage(mail_message.subject, mail_message.text, project.from_account.username, emails_array)
         msg.content_subtype = mail_message.content_type
-        msg.send()
-    elif project.mailing_type == 1:
-        for email in email_list:
-            msg = EmailMessage(mail_message.subject, mail_message.text, project.from_account.username,
-                               [email.email])
-
+        email_message_array.append(msg)
+    elif group.mailing_type == 1:
+        for client in clients:
+            msg = mail.EmailMessage(mail_message.subject, mail_message.text, project.from_account.username,
+                                    [client.email])
             msg.content_subtype = mail_message.content_type
-            msg.send()
+            email_message_array.append(msg)
+            Log.objects.create(action=0, user=request.user, from_account=project.from_account, from_project=project,
+                               from_group=group, message=mail_message, client=client)
+
+    try:
+        messages_count = connection.send_messages(email_message_array)
+    except SMTPException as error_message:
+        messages.error(request, error_message)
+        return redirect('home')
+
+    # %-)
+    try:
+        mail_account = MailAccount.objects.get(id=project.from_account.id)
+    except MailAccount.DoesNotExist as error_message:
+        messages.error(request, "WTF?! " + error_message)
+        return redirect('home')
+
+    mail_account.counter += messages_count
+    mail_account.save()
+
+    connection.close()
 
     messages.success(request, _("Successful"))
     return redirect('home')

@@ -15,18 +15,18 @@
                 <dd>{{ content.project.description|default:"<span class='muted'>---</span>" }}</dd>
 
                 <dt>{% trans "Date of creating" %}:</dt>
-                <dd>{{ content.project.date_create }}</dd>
-
-                <dt>{% trans "Date of last send" %}:</dt>
-                <dd>{{ content.project.date_send_last|default:"<span class='muted'>---</span>" }}</dd>
+                <dd>{{ content.project.date_creating }}</dd>
 
                 <dt>{% trans "From" %}:</dt>
                 <dd>{{ content.project.from_name }}
                   &lt;<a target="_blank" href="mailto:{{ content.project.from_account.username }}">{{ content.project.from_account.username }}</a>&gt;
                 </dd>
 
+                <dt>{% trans "Group" %}:</dt>
+                <dd>{{ content.group.name }}</dd>
+
                 <dt>{% trans "Mailing type" %}:</dt>
-                <dd>{{ content.project.get_mailing_type_display|default:"<span class='muted'>---</span>" }}</dd>
+                <dd>{{ content.group.get_mailing_type_display|default:"<span class='muted'>---</span>" }}</dd>
             </dl>
             <hr>
             <form action="{% url 'confirm' %}" method="get" class="form-horizontal">
@@ -34,11 +34,11 @@
                     <label class="control-label" for="id-select_message">{% blocktrans %}Messages list{% endblocktrans %}</label>
                     <div class="controls">
                         <select name="message" id="id-select_message" class="input-xxlarge">
-                            {% for mail_message in content.mail_messages reversed %}
-                                <option value="{{ mail_message.id }}">{{ mail_message.subject }} - {{ mail_message.date_create }}</option>
+                            {% for item in content.mail_messages reversed %}
+                                <option value="{{ item.id }}">{{ item.subject }} - {{ item.date_creating }}</option>
                             {% endfor %}
                         </select>
-                        <a class="btn btn-info" target="_blank" href="/admin/main/mailing/add/">{% blocktrans %}New message{% endblocktrans %}</a>
+                        <a class="btn btn-info" target="_blank" href="/admin/main/message/add/">{% blocktrans %}New message{% endblocktrans %}</a>
                     </div>
                 </div>
                 <div class="control-group">

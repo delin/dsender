@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-06 13:33+0400\n"
+"POT-Creation-Date: 2013-07-07 14:52+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,24 +17,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: accounts/views.py:20 templates/pages/login.html:49
+#: accounts/views.py:46
+msgid "This account disabled."
+msgstr ""
+
+#: accounts/views.py:48
+msgid "Wrong username or password."
+msgstr ""
+
+#: accounts/views.py:51 templates/pages/login.html:49
 #: templates/pages/login.html.py:52
 msgid "Sign in"
 msgstr ""
 
-#: accounts/views.py:47
-msgid "This account disabled."
-msgstr ""
-
-#: accounts/views.py:49
-msgid "Wrong username or password."
-msgstr ""
-
-#: dsender/settings.py:40
+#: dsender/settings.py:40 dsender/settings_dev.py:40
 msgid "Russian"
 msgstr ""
 
-#: dsender/settings.py:41
+#: dsender/settings.py:41 dsender/settings_dev.py:41
 msgid "English"
 msgstr ""
 
@@ -58,12 +58,13 @@ msgstr ""
 msgid "Use TLS"
 msgstr ""
 
-#: main/models.py:12 main/models.py:32 main/models.py:51
-#: templates/pages/select_message.html:14
+#: main/models.py:12 main/models.py:35 main/models.py:51 main/models.py:75
+#: templates/pages/select_group.html:12 templates/pages/select_message.html:14
 msgid "Description"
 msgstr ""
 
-#: main/models.py:13 main/models.py:33 main/models.py:54 main/models.py:78
+#: main/models.py:13 main/models.py:36 main/models.py:54 main/models.py:78
+#: main/models.py:101 templates/pages/select_group.html:15
 #: templates/pages/select_message.html:17
 msgid "Date of creating"
 msgstr ""
@@ -72,104 +73,142 @@ msgstr ""
 msgid "Counter"
 msgstr ""
 
-#: main/models.py:21
+#: main/models.py:15 main/models.py:37 main/models.py:55 main/models.py:79
+#: main/models.py:102
+msgid "Previous version"
+msgstr ""
+
+#: main/models.py:17 main/models.py:39 main/models.py:57 main/models.py:81
+#: main/models.py:104 main/models.py:131
+msgid "Removed"
+msgstr ""
+
+#: main/models.py:24
 msgid "Mail accounts"
 msgstr ""
 
-#: main/models.py:22
+#: main/models.py:25
 msgid "Mail account"
 msgstr ""
 
-#: main/models.py:29
+#: main/models.py:32
 msgid "Email"
 msgstr ""
 
-#: main/models.py:30
+#: main/models.py:33
 msgid "First name"
 msgstr ""
 
-#: main/models.py:31
+#: main/models.py:34
 msgid "Last name"
 msgstr ""
 
-#: main/models.py:34 main/models.py:55 templates/pages/select_message.html:20
-msgid "Date of last send"
+#: main/models.py:42
+msgid "Clients"
 msgstr ""
 
-#: main/models.py:37
-msgid "Mailing lists"
+#: main/models.py:43 main/models.py:130
+msgid "Client"
 msgstr ""
 
-#: main/models.py:38 templates/pages/confirm.html:28
-#: templates/pages/select_message.html:52 templates/pages/start_mailing.html:6
-msgid "Mailing list"
-msgstr ""
-
-#: main/models.py:46
-msgid "Copy"
-msgstr ""
-
-#: main/models.py:47
-msgid "Private"
-msgstr ""
-
-#: main/models.py:50
+#: main/models.py:50 main/models.py:73
 msgid "Name"
 msgstr ""
 
 #: main/models.py:52
-msgid "Groups"
-msgstr ""
-
-#: main/models.py:53
-msgid "Emails list"
-msgstr ""
-
-#: main/models.py:56
 msgid "From name"
 msgstr ""
 
-#: main/models.py:57
+#: main/models.py:53 main/models.py:126
 msgid "From account"
 msgstr ""
 
-#: main/models.py:58 templates/pages/select_message.html:28
-msgid "Mailing type"
-msgstr ""
-
-#: main/models.py:61
+#: main/models.py:60
 msgid "Projects"
 msgstr ""
 
-#: main/models.py:62 main/models.py:77 templates/pages/select_message.html:11
+#: main/models.py:61 main/models.py:74 templates/pages/select_group.html:9
+#: templates/pages/select_message.html:11
 msgid "Project"
 msgstr ""
 
-#: main/models.py:74 templates/pages/confirm.html:11
-msgid "Subject"
+#: main/models.py:69
+msgid "Copy"
 msgstr ""
 
-#: main/models.py:75 templates/pages/confirm.html:13
-msgid "Text"
+#: main/models.py:70
+msgid "Private"
 msgstr ""
 
 #: main/models.py:76
+msgid "Clients list"
+msgstr ""
+
+#: main/models.py:77 templates/pages/select_message.html:25
+msgid "Mailing type"
+msgstr ""
+
+#: main/models.py:84
+msgid "Groups"
+msgstr ""
+
+#: main/models.py:85 main/models.py:100
+msgid "Group"
+msgstr ""
+
+#: main/models.py:97 templates/pages/confirm.html:11
+msgid "Subject"
+msgstr ""
+
+#: main/models.py:98 templates/pages/confirm.html:13
+msgid "Text"
+msgstr ""
+
+#: main/models.py:99
 msgid "Content type"
 msgstr ""
 
-#: main/models.py:82
-msgid "Mailings"
+#: main/models.py:107
+msgid "Messages"
 msgstr ""
 
-#: main/models.py:83
-msgid "Mailing"
+#: main/models.py:108 main/models.py:129
+msgid "Message"
 msgstr ""
 
-#: main/views.py:20
+#: main/models.py:123
+msgid "Date and time"
+msgstr ""
+
+#: main/models.py:124
+msgid "Action"
+msgstr ""
+
+#: main/models.py:125
+msgid "User"
+msgstr ""
+
+#: main/models.py:127
+msgid "From project"
+msgstr ""
+
+#: main/models.py:128
+msgid "From group"
+msgstr ""
+
+#: main/models.py:134
+msgid "Logs"
+msgstr ""
+
+#: main/models.py:135
+msgid "Log"
+msgstr ""
+
+#: main/views.py:21
 msgid "Main page"
 msgstr ""
 
-#: main/views.py:27
+#: main/views.py:37
 msgid "Select project"
 msgstr ""
 
@@ -177,19 +216,27 @@ msgstr ""
 msgid "Project not selected"
 msgstr ""
 
-#: main/views.py:50
+#: main/views.py:65
+msgid "Select group"
+msgstr ""
+
+#: main/views.py:75
+msgid "Group not selected"
+msgstr ""
+
+#: main/views.py:94
 msgid "Select message"
 msgstr ""
 
-#: main/views.py:77 main/views.py:107
+#: main/views.py:105 main/views.py:137
 msgid "Message not selected"
 msgstr ""
 
-#: main/views.py:80
+#: main/views.py:126
 msgid "Confirm"
 msgstr ""
 
-#: main/views.py:132
+#: main/views.py:188
 msgid "Successful"
 msgstr ""
 
@@ -205,12 +252,18 @@ msgstr ""
 msgid "New mailing"
 msgstr ""
 
-#: templates/pages/confirm.html:7 templates/pages/select_message.html:23
+#: templates/pages/confirm.html:7 templates/pages/select_group.html:18
+#: templates/pages/select_message.html:20
 msgid "From"
 msgstr ""
 
-#: templates/pages/confirm.html:20
+#: templates/pages/confirm.html:23
 msgid "Send"
+msgstr ""
+
+#: templates/pages/confirm.html:31 templates/pages/select_message.html:49
+#: templates/pages/start_mailing.html:6
+msgid "Mailing list"
 msgstr ""
 
 #: templates/pages/home.html:5
@@ -241,22 +294,34 @@ msgstr ""
 msgid "Begin"
 msgstr ""
 
+#: templates/pages/select_group.html:6
+msgid "After adding a new group refresh the page."
+msgstr ""
+
+#: templates/pages/select_group.html:26
+msgid "Groups list"
+msgstr ""
+
+#: templates/pages/select_group.html:33
+msgid "New group"
+msgstr ""
+
+#: templates/pages/select_group.html:38 templates/pages/select_message.html:43
+#: templates/pages/select_project.html:22
+msgid "Next"
+msgstr ""
+
 #: templates/pages/select_message.html:8
 msgid "After adding a new message refresh the page."
 msgstr ""
 
-#: templates/pages/select_message.html:34
+#: templates/pages/select_message.html:31
 msgid "Messages list"
 msgstr ""
 
-#: templates/pages/select_message.html:41
+#: templates/pages/select_message.html:38
 #: templates/pages/start_mailing.html:13
 msgid "New message"
-msgstr ""
-
-#: templates/pages/select_message.html:46
-#: templates/pages/select_project.html:22
-msgid "Next"
 msgstr ""
 
 #: templates/pages/select_project.html:6

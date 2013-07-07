@@ -5,8 +5,8 @@
         <div class="span9">
             <dl class="dl-horizontal">
               <dt>{% trans "From" %}:</dt>
-              <dd>{{ content.mail_message.project.from_name }}
-                  &lt;<a target="_blank" href="mailto:{{ content.mail_message.project.from_account.username }}">{{ content.mail_message.project.from_account.username }}</a>&gt;
+              <dd>{{ content.project.from_name }}
+                  &lt;<a target="_blank" href="mailto:{{ content.project.from_account.username }}">{{ content.project.from_account.username }}</a>&gt;
               </dd>
               <dt>{% trans "Subject" %}:</dt>
               <dd>{{ content.mail_message.subject }}</dd>
