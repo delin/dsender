@@ -20,7 +20,7 @@
             <form action="{% url 'send' %}" method="post" class="form-horizontal">{% csrf_token %}
                 <div class="control-group">
                     <div class="controls">
-                        <button type="submit" class="btn">{% blocktrans %}Send{% endblocktrans %}</button>
+                        <button type="submit" class="btn btn-inverse">{% blocktrans %}Send{% endblocktrans %}</button>
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
         <div class="span3 well well-small">
             <h5>{% blocktrans %}Mailing list{% endblocktrans %}:</h5>
             <ol>
-                {% for email in content.to_emails %}<li>{{ email.first_name }} {{ email.last_name }} &lt;<a target="_blank" href="mailto:{{ email.email }}">{{ email.email }}</a>&gt;</li>{% endfor %}
+                {% include 'includes/clients_list.html' %}
             </ol>
         </div>
     </div>

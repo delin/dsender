@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-07 14:52+0400\n"
+"POT-Creation-Date: 2013-07-08 00:17+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,8 +27,8 @@ msgstr "Этот аккаунт отключен."
 msgid "Wrong username or password."
 msgstr "Ошибка при вводе имени пользователя или пароля."
 
-#: accounts/views.py:51 templates/pages/login.html:49
-#: templates/pages/login.html.py:52
+#: accounts/views.py:51 templates/pages/page_login.html:49
+#: templates/pages/page_login.html.py:52
 msgid "Sign in"
 msgstr "Войти"
 
@@ -44,11 +44,11 @@ msgstr ""
 msgid "Server"
 msgstr "Сервер"
 
-#: main/models.py:8 templates/pages/login.html:50
+#: main/models.py:8 templates/pages/page_login.html:50
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: main/models.py:9 templates/pages/login.html:51
+#: main/models.py:9 templates/pages/page_login.html:51
 msgid "Password"
 msgstr "Пароль"
 
@@ -61,13 +61,16 @@ msgid "Use TLS"
 msgstr "Использовать TLS"
 
 #: main/models.py:12 main/models.py:35 main/models.py:51 main/models.py:75
-#: templates/pages/select_group.html:12 templates/pages/select_message.html:14
+#: templates/pages/page_client_view.html:13
+#: templates/pages/page_select_group.html:12
+#: templates/pages/page_select_message.html:14
 msgid "Description"
 msgstr "Описание"
 
 #: main/models.py:13 main/models.py:36 main/models.py:54 main/models.py:78
-#: main/models.py:101 templates/pages/select_group.html:15
-#: templates/pages/select_message.html:17
+#: main/models.py:101 templates/pages/page_client_view.html:11
+#: templates/pages/page_select_group.html:15
+#: templates/pages/page_select_message.html:17
 msgid "Date of creating"
 msgstr "Дата создания"
 
@@ -93,15 +96,15 @@ msgstr "Почтовые аккаунты"
 msgid "Mail account"
 msgstr "Почтовый аккаунт"
 
-#: main/models.py:32
+#: main/models.py:32 templates/pages/page_client_view.html:9
 msgid "Email"
 msgstr "Почта"
 
-#: main/models.py:33
+#: main/models.py:33 templates/pages/page_client_view.html:5
 msgid "First name"
 msgstr "Имя"
 
-#: main/models.py:34
+#: main/models.py:34 templates/pages/page_client_view.html:7
 msgid "Last name"
 msgstr "Фамилия"
 
@@ -109,7 +112,7 @@ msgstr "Фамилия"
 msgid "Clients"
 msgstr "Клиенты"
 
-#: main/models.py:43 main/models.py:130
+#: main/models.py:43 main/models.py:130 templates/pages/page_logs_view.html:14
 msgid "Client"
 msgstr "Клиент"
 
@@ -121,7 +124,7 @@ msgstr "Название"
 msgid "From name"
 msgstr "От имени"
 
-#: main/models.py:53 main/models.py:126
+#: main/models.py:53 main/models.py:126 templates/pages/page_logs_view.html:11
 msgid "From account"
 msgstr "От аккаунта"
 
@@ -129,8 +132,10 @@ msgstr "От аккаунта"
 msgid "Projects"
 msgstr "Проекты"
 
-#: main/models.py:61 main/models.py:74 templates/pages/select_group.html:9
-#: templates/pages/select_message.html:11
+#: main/models.py:61 main/models.py:74
+#: templates/pages/page_client_view.html:21
+#: templates/pages/page_select_group.html:9
+#: templates/pages/page_select_message.html:11
 msgid "Project"
 msgstr "Проект"
 
@@ -146,7 +151,7 @@ msgstr "Личное"
 msgid "Clients list"
 msgstr "Список клиентов"
 
-#: main/models.py:77 templates/pages/select_message.html:25
+#: main/models.py:77 templates/pages/page_select_message.html:28
 msgid "Mailing type"
 msgstr "Тип рассылки"
 
@@ -155,14 +160,16 @@ msgid "Groups"
 msgstr "Группы"
 
 #: main/models.py:85 main/models.py:100
+#: templates/pages/page_client_view.html:22
+#: templates/pages/page_select_message.html:25
 msgid "Group"
 msgstr "Группа"
 
-#: main/models.py:97 templates/pages/confirm.html:11
+#: main/models.py:97 templates/pages/page_confirm.html:11
 msgid "Subject"
 msgstr "Тема"
 
-#: main/models.py:98 templates/pages/confirm.html:13
+#: main/models.py:98 templates/pages/page_confirm.html:13
 msgid "Text"
 msgstr "Текст"
 
@@ -178,23 +185,43 @@ msgstr "Сообщения"
 msgid "Message"
 msgstr "Сообщение"
 
-#: main/models.py:123
+#: main/models.py:116
+msgid "Send mail"
+msgstr "Отправка почты"
+
+#: main/models.py:117
+msgid "Unsubscribe"
+msgstr "Отписка от рассылки"
+
+#: main/models.py:118
+msgid "Edit project"
+msgstr "Редактирование проекта"
+
+#: main/models.py:119
+msgid "Edit message"
+msgstr "Редактирование сообщения"
+
+#: main/models.py:120
+msgid "Edit client"
+msgstr "Редактиросние клиента"
+
+#: main/models.py:123 templates/pages/page_logs_view.html:8
 msgid "Date and time"
 msgstr "Дата и время"
 
-#: main/models.py:124
+#: main/models.py:124 templates/pages/page_logs_view.html:9
 msgid "Action"
 msgstr "Действие"
 
-#: main/models.py:125
+#: main/models.py:125 templates/pages/page_logs_view.html:10
 msgid "User"
 msgstr "Пользователя"
 
-#: main/models.py:127
+#: main/models.py:127 templates/pages/page_logs_view.html:12
 msgid "From project"
 msgstr "От проекта"
 
-#: main/models.py:128
+#: main/models.py:128 templates/pages/page_logs_view.html:13
 msgid "From group"
 msgstr "От группы"
 
@@ -223,25 +250,36 @@ msgid "Select group"
 msgstr "Выбор группы"
 
 #: main/views.py:75
-#, fuzzy
 msgid "Group not selected"
 msgstr "Проект не выбран"
 
-#: main/views.py:94
+#: main/views.py:95
 msgid "Select message"
 msgstr "Выбор сообщения"
 
-#: main/views.py:105 main/views.py:137
+#: main/views.py:106 main/views.py:138
 msgid "Message not selected"
 msgstr "Сообщение не выбрано"
 
-#: main/views.py:126
+#: main/views.py:127
 msgid "Confirm"
 msgstr "Подтверждение"
 
-#: main/views.py:188
+#: main/views.py:205
 msgid "Successful"
 msgstr "Успешно"
+
+#: main/views.py:220
+msgid "View all logs"
+msgstr "Просмотр всех логов"
+
+#: main/views.py:233
+msgid "Add new client"
+msgstr "Добавление нового клиента"
+
+#: main/views.py:256
+msgid "View client"
+msgstr "Подробнее о клиенте"
 
 #: templates/base.html:25
 msgid "Logged in as"
@@ -255,93 +293,96 @@ msgstr "выход"
 msgid "New mailing"
 msgstr "Новая рассылка"
 
-#: templates/pages/confirm.html:7 templates/pages/select_group.html:18
-#: templates/pages/select_message.html:20
+#: templates/pages/page_confirm.html:7
+#: templates/pages/page_select_group.html:18
+#: templates/pages/page_select_message.html:20
 msgid "From"
 msgstr "От"
 
-#: templates/pages/confirm.html:23
+#: templates/pages/page_confirm.html:23
 msgid "Send"
 msgstr "Отправить"
 
-#: templates/pages/confirm.html:31 templates/pages/select_message.html:49
-#: templates/pages/start_mailing.html:6
+#: templates/pages/page_confirm.html:31
+#: templates/pages/page_select_message.html:52
 msgid "Mailing list"
 msgstr "Лист рассылки"
 
-#: templates/pages/home.html:5
+#: templates/pages/page_home.html:5
 msgid "Hello"
 msgstr "Привет"
 
-#: templates/pages/home.html:6
+#: templates/pages/page_home.html:6
 msgid "This service is used for mass mailing emails."
 msgstr "Этот сервис служит для массовой рассылке писем."
 
-#: templates/pages/home.html:9
+#: templates/pages/page_home.html:9
 msgid "Choose a project (or create a new one)."
 msgstr "Выбирай проект (либо создай новый)."
 
-#: templates/pages/home.html:10
+#: templates/pages/page_home.html:10
 msgid "Choose the text and title of the message (or create new)."
 msgstr "Выбирай текст и название сообщения (либо создай новое)."
 
-#: templates/pages/home.html:11
+#: templates/pages/page_home.html:11
 msgid "Check whether all right."
 msgstr "Проверь всё ли верно."
 
-#: templates/pages/home.html:12
+#: templates/pages/page_home.html:12
 msgid "Send it."
 msgstr "Отправляй."
 
-#: templates/pages/home.html:16
+#: templates/pages/page_home.html:16
 msgid "Begin"
 msgstr "Начать"
 
-#: templates/pages/select_group.html:6
+#: templates/pages/page_select_group.html:6
 msgid "After adding a new group refresh the page."
 msgstr "После добавления новой группы обновите страницу."
 
-#: templates/pages/select_group.html:26
+#: templates/pages/page_select_group.html:26
 msgid "Groups list"
 msgstr "Список групп"
 
-#: templates/pages/select_group.html:33
+#: templates/pages/page_select_group.html:33
 msgid "New group"
 msgstr "Новая группа"
 
-#: templates/pages/select_group.html:38 templates/pages/select_message.html:43
-#: templates/pages/select_project.html:22
+#: templates/pages/page_select_group.html:38
+#: templates/pages/page_select_message.html:46
+#: templates/pages/page_select_project.html:22
 msgid "Next"
 msgstr "Далее"
 
-#: templates/pages/select_message.html:8
+#: templates/pages/page_select_message.html:8
 msgid "After adding a new message refresh the page."
 msgstr "После добавления нового сообщения обновите страницу."
 
-#: templates/pages/select_message.html:31
+#: templates/pages/page_select_message.html:34
 msgid "Messages list"
 msgstr "Список сообщений"
 
-#: templates/pages/select_message.html:38
-#: templates/pages/start_mailing.html:13
+#: templates/pages/page_select_message.html:41
 msgid "New message"
 msgstr "Новое сообщение"
 
-#: templates/pages/select_project.html:6
+#: templates/pages/page_select_project.html:6
 msgid "After adding a new project refresh the page."
 msgstr "После добавления нового проекта обновите страницу."
 
-#: templates/pages/select_project.html:10
+#: templates/pages/page_select_project.html:10
 msgid "Projects list"
 msgstr "Список проектов"
 
-#: templates/pages/select_project.html:17
+#: templates/pages/page_select_project.html:17
 msgid "New project"
 msgstr "Новый проект"
 
-#: templates/pages/start_mailing.html:18
-msgid "Start mailing"
-msgstr "Начало рассылки"
+#~ msgid "Date"
+#~ msgstr "Дата"
+
+#~ msgid "Start mailing"
+#~ msgstr "Начало рассылки"
 
 #~ msgid "Date of last send"
 #~ msgstr "Дата последней отправки"

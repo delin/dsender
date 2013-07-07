@@ -47,7 +47,7 @@ def page_login(request):
             else:
                 messages.error(request, _("Wrong username or password."))
 
-    return render(request, 'pages/login.html', {
+    return render(request, 'pages/page_login.html', {
         'title': _("Sign in"),
         'data': data,
         'content': content

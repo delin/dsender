@@ -25,6 +25,12 @@ urlpatterns += patterns('',
     url(r'^confirm/', 'main.views.page_confirm', name='confirm'),
     url(r'^send/', 'main.views.page_send', name='send'),
 
+    url(r'^logs/all/', 'main.views.page_logs', name='logs_view'),
+
+    url(r'^client/add/', 'main.views.page_client_add', name='client_add'),
+    #url(r'^client/edit/', 'main.views.page_client_edit', name='client_edit'),
+    url(r'^client/(?P<client_id>\d+)/$', 'main.views.page_client_view', name='client_view'),
+
     url(r'^accounts/', include('accounts.urls', namespace='accounts', app_name='accounts')),
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -51,7 +51,7 @@
         <div class="span3 well well-small">
             <h5>{% blocktrans %}Mailing list{% endblocktrans %}:</h5>
             <ol>
-                {% for email in content.to_emails %}<li>{{ email.first_name }} {{ email.last_name }} &lt;<a target="_blank" href="mailto:{{ email.email }}">{{ email.email }}</a>&gt;</li>{% endfor %}
+                {% include 'includes/clients_list.html' %}
             </ol>
         </div>
     </div>

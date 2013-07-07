@@ -1,17 +1,15 @@
-from itertools import count
 from django.conf import settings as global_settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core import mail
 from django.core.context_processors import csrf
-from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.utils.translation import ugettext as _
 from smtplib import SMTPException
 from dsender.functions import prepare_data
-from main.models import Message, Project, Group, MailAccount, Log
+from main.models import Message, Project, Group, MailAccount, Log, Client
 
 
 @login_required
@@ -19,7 +17,7 @@ from main.models import Message, Project, Group, MailAccount, Log
 def page_home(request):
     data = prepare_data(request)
 
-    return render(request, "pages/home.html", {
+    return render(request, "pages/page_home.html", {
         'title': _("Main page"),
         'data': data,
     })
@@ -35,8 +33,8 @@ def page_select_project(request):
         'projects': projects,
     }
 
-    return render(request, "pages/select_project.html", {
-        'title': _("Select project") + " - 1/3",
+    return render(request, "pages/page_select_project.html", {
+        'title': _("Select project") + " - 1/4",
         'data': data,
         'content': content
     })
@@ -63,8 +61,8 @@ def page_select_group(request):
         'project': project,
     }
 
-    return render(request, "pages/select_group.html", {
-        'title': _("Select group") + " - 2/3",
+    return render(request, "pages/page_select_group.html", {
+        'title': _("Select group") + " - 2/4",
         'data': data,
         'content': content
     })
@@ -93,8 +91,8 @@ def page_select_message(request):
         'to_emails': group.clients.all()
     }
 
-    return render(request, "pages/select_message.html", {
-        'title': _("Select message") + " - 2/3",
+    return render(request, "pages/page_select_message.html", {
+        'title': _("Select message") + " - 3/4",
         'data': data,
         'content': content
     })
@@ -125,8 +123,8 @@ def page_confirm(request):
         'to_emails': message.group.clients.all()
     }
 
-    return render(request, "pages/confirm.html", {
-        'title': _("Confirm") + " - 3/3",
+    return render(request, "pages/page_confirm.html", {
+        'title': _("Confirm") + " - 4/4",
         'data': data,
         'content': content
     })
@@ -206,3 +204,56 @@ def page_send(request):
 
     messages.success(request, _("Successful"))
     return redirect('home')
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET"])
+def page_logs(request):
+    data = prepare_data(request)
+
+    content = {
+        'logs': Log.objects.all()
+    }
+
+    return render(request, "pages/page_logs_view.html", {
+        'title': _("View all logs"),
+        'data': data,
+        'content': content,
+    })
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET", "POST"])
+def page_client_add(request):
+    data = prepare_data(request)
+
+    return render(request, "pages/page_client_add.html", {
+        'title': _("Add new client"),
+        'data': data,
+    })
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET"])
+def page_client_view(request, client_id):
+    data = prepare_data(request)
+
+    try:
+        client = Client.objects.get(id=client_id)
+    except Client.DoesNotExist as error_message:
+        messages.error(request, error_message)
+        return redirect('home')
+
+    content = {
+        'client': client,
+        'groups': Group.objects.filter(clients__in=client_id),
+    }
+
+    return render(request, "pages/page_client_view.html", {
+        'title': _("View client"),
+        'data': data,
+        'content': content,
+    })

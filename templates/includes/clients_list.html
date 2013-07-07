@@ -1,0 +1,6 @@
+{% for client in content.to_emails %}
+<li>
+    <a href="{% url 'client_view' client.id %}">{{ client.first_name }} {{ client.last_name }}</a>
+    &lt;<a target="_blank" href="mailto:{{ client.email }}">{{ client.email }}</a>&gt;
+</li>
+{% endfor %}

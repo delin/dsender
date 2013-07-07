@@ -113,11 +113,11 @@ class Message(models.Model):
 
 class Log(models.Model):
     ACTIONS = (
-        (0, 'Send mail'),
-        (1, 'Unsubscribe'),
-        (2, 'Edit project'),
-        (3, 'Edit message'),
-        (4, 'Edit client'),
+        (0, _('Send mail')),
+        (1, _('Unsubscribe')),
+        (2, _('Edit project')),
+        (3, _('Edit message')),
+        (4, _('Edit client')),
     )
 
     date = models.DateTimeField(verbose_name=_("Date and time"), auto_now_add=True)
@@ -135,4 +135,4 @@ class Log(models.Model):
         verbose_name = _('Log')
 
     def __str__(self):
-        return "%s: %s" % (self.date, self.get_action_display)
+        return "%s: %s" % (self.date, self.get_action_display())
