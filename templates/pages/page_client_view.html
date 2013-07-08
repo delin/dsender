@@ -3,15 +3,15 @@
 {% block content %}
     <dl class="dl-horizontal">
         <dt>{% blocktrans %}First name{% endblocktrans %}:</dt>
-        <dd>{{ content.client.first_name }}</dd>
+        <dd>{{ content.client.first_name|default:"<span class='muted'>---</span>" }}</dd>
         <dt>{% blocktrans %}Last name{% endblocktrans %}:</dt>
-        <dd>{{ content.client.last_name }}</dd>
+        <dd>{{ content.client.last_name|default:"<span class='muted'>---</span>" }}</dd>
         <dt>{% blocktrans %}Email{% endblocktrans %}:</dt>
-        <dd>{{ content.client.email }}</dd>
+        <dd>{{ content.client.email|default:"<span class='muted'>---</span>" }}</dd>
         <dt>{% blocktrans %}Date of creating{% endblocktrans %}:</dt>
-        <dd>{{ content.client.date_creating }}</dd>
+        <dd>{{ content.client.date_creating|default:"<span class='muted'>---</span>" }}</dd>
         <dt>{% blocktrans %}Description{% endblocktrans %}:</dt>
-        <dd><pre>{{ content.client.description }}</pre></dd>
+        <dd><pre>{{ content.client.description|default:"<span class='muted'>---</span>" }}</pre></dd>
     </dl>
 
     <table class="table table-condensed table-hover table-striped">

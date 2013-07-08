@@ -1,3 +1,4 @@
+from hashlib import md5
 from django.conf import settings as global_settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -8,7 +9,9 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.utils.translation import ugettext as _
 from smtplib import SMTPException
+from random import randint
 from dsender.functions import prepare_data
+from main.forms import ClientForm
 from main.models import Message, Project, Group, MailAccount, Log, Client
 
 
@@ -229,9 +232,27 @@ def page_logs(request):
 def page_client_add(request):
     data = prepare_data(request)
 
+    client_form = ClientForm(request.POST or None)
+    if request.method == "POST":
+        if client_form.is_valid():
+            new_client = client_form.save(commit=False)
+            new_client .unsubscribe_code = md5(
+                str(request.POST['email'] + str(randint(100000, 1000000))).encode()).hexdigest()
+            new_client.save()
+
+            messages.success(request, _("Created"))
+            return redirect('client_add')
+        else:
+            messages.error(request, client_form.errors)
+
+    content = {
+        'client_form': client_form,
+    }
+
     return render(request, "pages/page_client_add.html", {
         'title': _("Add new client"),
         'data': data,
+        'content': content,
     })
 
 

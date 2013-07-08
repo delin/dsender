@@ -12,7 +12,7 @@ class MailAccount(models.Model):
     description = models.TextField(verbose_name=_("Description"), max_length=1024, blank=True, null=True)
     date_creating = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
     counter = models.BigIntegerField(verbose_name=_("Counter"), default=0)
-    previous_version = models.ForeignKey('Message', verbose_name=_("Previous version"), null=True, blank=True,
+    previous_version = models.ForeignKey('MailAccount', verbose_name=_("Previous version"), null=True, blank=True,
                                          related_name='previous_version_account')
     is_removed = models.BooleanField(verbose_name=_("Removed"), default=False)
     # TODO add limits
@@ -33,8 +33,10 @@ class Client(models.Model):
     first_name = models.CharField(verbose_name=_("First name"), max_length=512)
     last_name = models.CharField(verbose_name=_("Last name"), max_length=512)
     description = models.TextField(verbose_name=_("Description"), max_length=1024, blank=True, null=True)
+    unsubscribe_code = models.CharField(verbose_name=_("Unsubscribe code"), max_length=32)
+    is_unsubscribed = models.BooleanField(verbose_name=_("Removed"), default=False)
     date_creating = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
-    previous_version = models.ForeignKey('Message', verbose_name=_("Previous version"), null=True, blank=True,
+    previous_version = models.ForeignKey('Client', verbose_name=_("Previous version"), null=True, blank=True,
                                          related_name='previous_version_client')
     is_removed = models.BooleanField(verbose_name=_("Removed"), default=False)
 
@@ -52,7 +54,7 @@ class Project(models.Model):
     from_name = models.CharField(verbose_name=_("From name"), max_length=1024)
     from_account = models.ForeignKey(MailAccount, verbose_name=_("From account"))
     date_creating = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
-    previous_version = models.ForeignKey('Message', verbose_name=_("Previous version"), null=True, blank=True,
+    previous_version = models.ForeignKey('Project', verbose_name=_("Previous version"), null=True, blank=True,
                                          related_name='previous_version_project')
     is_removed = models.BooleanField(verbose_name=_("Removed"), default=False)
 
@@ -76,7 +78,7 @@ class Group(models.Model):
     clients = models.ManyToManyField(Client, verbose_name=_("Clients list"))
     mailing_type = models.PositiveSmallIntegerField(verbose_name=_("Mailing type"), choices=MAILING_TYPE, default=1)
     date_creating = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
-    previous_version = models.ForeignKey('Message', verbose_name=_("Previous version"), null=True, blank=True,
+    previous_version = models.ForeignKey('Group', verbose_name=_("Previous version"), null=True, blank=True,
                                          related_name='previous_version_group')
     is_removed = models.BooleanField(verbose_name=_("Removed"), default=False)
 
