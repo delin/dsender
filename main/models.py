@@ -123,6 +123,7 @@ class Log(models.Model):
         (5, _('Add project')),
         (6, _('Add message')),
         (7, _('Add client')),
+        (8, _('Send test email')),
     )
 
     date = models.DateTimeField(verbose_name=_("Date and time"), auto_now_add=True)

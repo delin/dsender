@@ -22,10 +22,11 @@
               </dd>
             </dl>
             <hr>
-            <form action="{% url 'send' %}" method="post" class="form-horizontal">{% csrf_token %}
+            <form action="{% url 'send' %}" method="post" class="form-horizontal form-actions">{% csrf_token %}
                 <div class="control-group">
                     <div class="controls">
-                        <button type="submit" class="btn btn-inverse">{% blocktrans %}Send{% endblocktrans %}</button>
+                        <button name="button_send" type="submit" class="btn btn-primary">{% blocktrans %}Send{% endblocktrans %}</button>
+                        <button name="button_send_test" type="submit" class="btn">{% blocktrans %}Send test email{% endblocktrans %}</button>
                     </div>
                 </div>
 

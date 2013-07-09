@@ -1,10 +1,10 @@
 from hashlib import md5
 from django.conf import settings as global_settings
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.core import mail
 from django.core.context_processors import csrf
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
 from django.template import Context
 from django.template.loader import get_template
@@ -87,6 +87,11 @@ def page_select_message(request):
         messages.error(request, error_message)
         return redirect('select_group')
 
+    clients = group.clients.filter(is_removed=False, is_unsubscribed=False).all()
+    if not clients:
+        messages.warning(request, _("The mailing list is empty."))
+        return redirect('select_group')
+
     data = prepare_data(request)
     mail_messages = Message.objects.filter(group=group)
 
@@ -94,7 +99,7 @@ def page_select_message(request):
         'group': group,
         'mail_messages': mail_messages,
         'project': group.project,
-        'to_emails': group.clients.all()
+        'to_emails': clients
     }
 
     return render(request, "pages/page_select_message.html", {
@@ -118,6 +123,11 @@ def page_confirm(request):
         messages.error(request, error_message)
         return redirect('select_group')
 
+    clients = message.group.clients.filter(is_removed=False, is_unsubscribed=False).all()
+    if not clients:
+        messages.warning(request, _("The mailing list is empty."))
+        return redirect('select_group')
+
     c = {}
     c.update(csrf(request))
     data = prepare_data(request)
@@ -138,7 +148,7 @@ def page_confirm(request):
         'mail_message': message,
         'project': message.group.project,
         'group': message.group,
-        'to_emails': message.group.clients.all(),
+        'to_emails': clients,
         'message_text': message_text,
     }
 
@@ -176,15 +186,15 @@ def page_send(request):
     global_settings.EMAIL_PORT = project.from_account.port
     global_settings.EMAIL_USE_TLS = project.from_account.use_tls
 
-    try:
-        connection = mail.get_connection()
-        connection.open()
-    except SMTPException as error_message:
-        messages.error(request, error_message)
-        return redirect('home')
-
-    email_message_array = []
+    messages_count = 0
     if group.mailing_type == 0:         # as Copy
+        try:
+            connection = mail.get_connection()
+            connection.open()
+        except SMTPException as error_message:
+            messages.error(request, error_message)
+            return redirect('home')
+
         emails_array = []
         for client in clients:
             emails_array.append(client.email)
@@ -193,12 +203,22 @@ def page_send(request):
 
         msg = mail.EmailMessage(mail_message.subject, mail_message.text, project.from_account.username, emails_array)
         msg.content_subtype = mail_message.content_type
-        email_message_array.append(msg)
+
+        try:
+            messages_count = connection.send_messages(msg)
+            connection.close()
+        except SMTPException as error_message:
+            messages.error(request, error_message)
+            return redirect('home')
     elif group.mailing_type == 1:       # as Private
         message_plain = get_template('messages/base.txt')
         message_html = get_template('messages/base.html')
 
         for client in clients:
+
+            if 'button_send_test' in request.POST:
+                client = request.user
+
             content = Context({
                 'client': client,
                 'message': mail_message.text,
@@ -209,19 +229,23 @@ def page_send(request):
             else:
                 message = message_plain.render(content)
 
-            msg = mail.EmailMessage(mail_message.subject, message, project.from_account.username, [client.email])
-            msg.content_subtype = mail_message.content_type
-            email_message_array.append(msg)
-            Log.objects.create(action=0, user=request.user, from_account=project.from_account, from_project=project,
-                               from_group=group, message=mail_message, client=client)
+            try:
+                msg = EmailMessage(mail_message.subject, message, project.from_account.username, [client.email])
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+            except SMTPException as error_message:
+                messages.error(request, error_message)
+                return redirect('home')
 
-    try:
-        messages_count = connection.send_messages(email_message_array)
-    except SMTPException as error_message:
-        messages.error(request, error_message)
-        return redirect('home')
+            if 'button_send_test' in request.POST:
+                Log.objects.create(action=8, user=request.user, from_account=project.from_account, from_project=project,
+                                   from_group=group, message=mail_message)
+                break
+            else:
+                Log.objects.create(action=0, user=request.user, from_account=project.from_account, from_project=project,
+                                   from_group=group, message=mail_message, client=client)
+            messages_count += 1
 
-    # %-)
     try:
         mail_account = MailAccount.objects.get(id=project.from_account.id)
     except MailAccount.DoesNotExist as error_message:
@@ -231,14 +255,12 @@ def page_send(request):
     mail_account.counter += messages_count
     mail_account.save()
 
-    connection.close()
-
     messages.success(request, _("Successful"))
     return redirect('home')
 
 
 @csrf_protect
-@login_required
+@permission_required('is_superuser')
 @require_http_methods(["GET"])
 def page_logs(request):
     data = prepare_data(request)
@@ -267,6 +289,8 @@ def page_client_add(request):
             new_client.unsubscribe_code = md5(
                 str(request.POST['email'] + str(randint(100000, 1000000))).encode()).hexdigest()
             new_client.save()
+
+            Log.objects.create(action=7, user=request.user, client=new_client)
 
             messages.success(request, _("Created"))
             return redirect('client_add')
@@ -320,12 +344,12 @@ def page_client_unsubscribe(request, client_id, code):
         return redirect('home')
 
     if request.method == "GET":
+        if client.is_unsubscribed:
+            return redirect('client_unsubscribe_ok', client_id=client.id, code=client.unsubscribe_code)
+
         content = {
             'client': client,
         }
-
-        if client.is_unsubscribed:
-            return redirect('client_unsubscribe_ok', client_id=client.id, code=client.unsubscribe_code)
 
         return render(request, "pages/page_client_unsubscribe.html", {
             'title': _("Unsubscribe"),
@@ -336,6 +360,7 @@ def page_client_unsubscribe(request, client_id, code):
         client.is_unsubscribed = True
         client.save()
 
+        messages.info(request, _("You have successfully unsubscribed."))
         Log.objects.create(action=1, client=client)
 
         return redirect('client_unsubscribe_ok', client_id=client.id, code=client.unsubscribe_code)
@@ -351,10 +376,11 @@ def page_client_unsubscribe_ok(request, client_id, code):
         messages.error(request, error_message)
         return redirect('home')
 
-    if client.is_unsubscribed:
-        messages.info(request, _("You already unsubscribed."))
-    else:
-        messages.info(request, _("You have successfully unsubscribed."))
+    if not messages.get_messages(request):
+        if client.is_unsubscribed:
+            messages.info(request, _("You already unsubscribed."))
+        else:
+            return redirect('client_unsubscribe', client_id=client.id, code=client.unsubscribe_code)
 
     return render(request, "pages/page_client_unsubscribe_ok.html", {
         'title': _("Unsubscribe"),

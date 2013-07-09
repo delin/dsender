@@ -20,11 +20,17 @@
                 <td>{{ forloop.counter }}</td>
                 <td>{{ log.date }}</td>
                 <td>{{ log.get_action_display }}</td>
-                <td>{{ log.user.username }}</td>
-                <td>{{ log.from_account.username }}</td>
-                <td>{{ log.from_project.name }}</td>
-                <td>{{ log.from_group.name }}</td>
-                <td><a href="{% url 'client_view' log.client.id %}">{{ log.client.first_name|default:log.client.email }} {{ log.client.last_name }}</a></td>
+                <td>{{ log.user.username|default:"<span class='muted'>---</span>" }}</td>
+                <td>{{ log.from_account.username|default:"<span class='muted'>---</span>" }}</td>
+                <td>{{ log.from_project.name|default:"<span class='muted'>---</span>" }}</td>
+                <td>{{ log.from_group.name|default:"<span class='muted'>---</span>" }}</td>
+                <td>
+                    {% if log.client %}
+                    <a href="{% url 'client_view' log.client.id %}">{{ log.client.first_name|default:log.client.email }} {{ log.client.last_name }}</a>
+                    {% else %}
+                    <span class='muted'>---</span>
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
