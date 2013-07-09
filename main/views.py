@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core import mail
 from django.core.context_processors import csrf
+from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.template import Context
 from django.template.loader import get_template
@@ -167,7 +168,7 @@ def page_send(request):
 
     group = mail_message.group
     project = group.project
-    clients = group.clients.all()
+    clients = group.clients.filter(is_removed=False, is_unsubscribed=False)
 
     global_settings.EMAIL_HOST = project.from_account.server
     global_settings.EMAIL_HOST_USER = project.from_account.username
@@ -263,7 +264,7 @@ def page_client_add(request):
     if request.method == "POST":
         if client_form.is_valid():
             new_client = client_form.save(commit=False)
-            new_client .unsubscribe_code = md5(
+            new_client.unsubscribe_code = md5(
                 str(request.POST['email'] + str(randint(100000, 1000000))).encode()).hexdigest()
             new_client.save()
 
@@ -290,7 +291,7 @@ def page_client_view(request, client_id):
     data = prepare_data(request)
 
     try:
-        client = Client.objects.get(id=client_id)
+        client = Client.objects.get(id=client_id, is_removed=False)
     except Client.DoesNotExist as error_message:
         messages.error(request, error_message)
         return redirect('home')
@@ -313,7 +314,7 @@ def page_client_unsubscribe(request, client_id, code):
     data = prepare_data(request)
 
     try:
-        client = Client.objects.get(id=client_id, unsubscribe_code=code)
+        client = Client.objects.get(id=client_id, is_removed=False, unsubscribe_code=code)
     except Client.DoesNotExist as error_message:
         messages.error(request, error_message)
         return redirect('home')
@@ -322,6 +323,9 @@ def page_client_unsubscribe(request, client_id, code):
         content = {
             'client': client,
         }
+
+        if client.is_unsubscribed:
+            return redirect('client_unsubscribe_ok', client_id=client.id, code=client.unsubscribe_code)
 
         return render(request, "pages/page_client_unsubscribe.html", {
             'title': _("Unsubscribe"),
@@ -332,8 +336,7 @@ def page_client_unsubscribe(request, client_id, code):
         client.is_unsubscribed = True
         client.save()
 
-        # Log.objects.create(action=0, user=request.user, from_account=project.from_account, from_project=project,
-        #                    from_group=group, message=mail_message, client=client)
+        Log.objects.create(action=1, client=client)
 
         return redirect('client_unsubscribe_ok', client_id=client.id, code=client.unsubscribe_code)
 
@@ -343,27 +346,17 @@ def page_client_unsubscribe_ok(request, client_id, code):
     data = prepare_data(request)
 
     try:
-        client = Client.objects.get(id=client_id, unsubscribe_code=code)
+        client = Client.objects.get(id=client_id, is_removed=False, unsubscribe_code=code)
     except Client.DoesNotExist as error_message:
         messages.error(request, error_message)
         return redirect('home')
 
-    if request.method == "GET":
-        content = {
-            'client': client,
-            'groups': Group.objects.filter(clients__in=client_id),
-        }
+    if client.is_unsubscribed:
+        messages.info(request, _("You already unsubscribed."))
+    else:
+        messages.info(request, _("You have successfully unsubscribed."))
 
-        return render(request, "pages/page_client_unsubscribe_ok.html", {
-            'title': _("Unsubscribe"),
-            'data': data,
-            'content': content,
-        })
-    elif request.method == "POST":
-        client.is_unsubscribed = True
-        client.save()
-
-        return render(request, "pages/page_client_unsubscribe_ok.html", {
-            'title': _("Unsubscribe"),
-            'data': data,
-        })
+    return render(request, "pages/page_client_unsubscribe_ok.html", {
+        'title': _("Unsubscribe"),
+        'data': data,
+    })

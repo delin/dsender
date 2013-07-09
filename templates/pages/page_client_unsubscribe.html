@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "client_base.html" %}
 {% load i18n %}
 {% block content %}
     <form action="{% url 'client_unsubscribe' content.client.id content.client.unsubscribe_code %}" method="post" class="form-actions">{% csrf_token %}

@@ -7,7 +7,7 @@
 <body>
     <p>{% trans "Hello" %} {% if client %}{{ client.first_name }} {{ client.last_name }}{% else %}{username}{% endif %}!</p>
 
-    <p>{{ message }}</p>
+    <p>{% autoescape off %}{{ message }}{% endautoescape %}</p>
 
     <p><a href="{% if client %}http://localhost:8000{% url 'client_unsubscribe' client.id client.unsubscribe_code %}{% else %}#{% endif %}">{% trans "Unsubscribe" %}</a></p>
 </body>

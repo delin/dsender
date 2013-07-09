@@ -4,6 +4,8 @@
     <div class="row-fluid">
         <div class="span9">
             <dl class="dl-horizontal">
+              <dt>{% trans "Message type" %}:</dt>
+              <dd>{% ifequal content.mail_message.content_type "plain" %}{% trans "Text" %}{% else %}HTML{% endifequal %}</dd>
               <dt>{% trans "From" %}:</dt>
               <dd>{{ content.project.from_name }}
                   &lt;<a target="_blank" href="mailto:{{ content.project.from_account.username }}">{{ content.project.from_account.username }}</a>&gt;
