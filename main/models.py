@@ -34,7 +34,7 @@ class Client(models.Model):
     last_name = models.CharField(verbose_name=_("Last name"), max_length=512)
     description = models.TextField(verbose_name=_("Description"), max_length=1024, blank=True, null=True)
     unsubscribe_code = models.CharField(verbose_name=_("Unsubscribe code"), max_length=32)
-    is_unsubscribed = models.BooleanField(verbose_name=_("Removed"), default=False)
+    is_unsubscribed = models.BooleanField(verbose_name=_("Is unsubscribed"), default=False)
     date_creating = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
     previous_version = models.ForeignKey('Client', verbose_name=_("Previous version"), null=True, blank=True,
                                          related_name='previous_version_client')

@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.core import mail
 from django.core.context_processors import csrf
 from django.shortcuts import redirect, render
+from django.template import Context
+from django.template.loader import get_template
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.utils.translation import ugettext as _
@@ -168,7 +170,7 @@ def page_send(request):
         return redirect('home')
 
     email_message_array = []
-    if group.mailing_type == 0:
+    if group.mailing_type == 0:         # as Copy
         emails_array = []
         for client in clients:
             emails_array.append(client.email)
@@ -178,10 +180,22 @@ def page_send(request):
         msg = mail.EmailMessage(mail_message.subject, mail_message.text, project.from_account.username, emails_array)
         msg.content_subtype = mail_message.content_type
         email_message_array.append(msg)
-    elif group.mailing_type == 1:
+    elif group.mailing_type == 1:       # as Private
+        message_plain = get_template('messages/base.txt')
+        message_html = get_template('messages/base.html')
+
         for client in clients:
-            msg = mail.EmailMessage(mail_message.subject, mail_message.text, project.from_account.username,
-                                    [client.email])
+            content = Context({
+                'client': client,
+                'message': mail_message.text,
+            })
+
+            if mail_message.content_type == "html":
+                message = message_html.render(content)
+            else:
+                message = message_plain.render(content)
+
+            msg = mail.EmailMessage(mail_message.subject, message, project.from_account.username, [client.email])
             msg.content_subtype = mail_message.content_type
             email_message_array.append(msg)
             Log.objects.create(action=0, user=request.user, from_account=project.from_account, from_project=project,
@@ -278,3 +292,65 @@ def page_client_view(request, client_id):
         'data': data,
         'content': content,
     })
+
+
+@csrf_protect
+@require_http_methods(["GET", "POST"])
+def page_client_unsubscribe(request, client_id, code):
+    data = prepare_data(request)
+
+    try:
+        client = Client.objects.get(id=client_id, unsubscribe_code=code)
+    except Client.DoesNotExist as error_message:
+        messages.error(request, error_message)
+        return redirect('home')
+
+    if request.method == "GET":
+        content = {
+            'client': client,
+        }
+
+        return render(request, "pages/page_client_unsubscribe.html", {
+            'title': _("Unsubscribe"),
+            'data': data,
+            'content': content,
+        })
+    elif request.method == "POST":
+        client.is_unsubscribed = True
+        client.save()
+
+        # Log.objects.create(action=0, user=request.user, from_account=project.from_account, from_project=project,
+        #                    from_group=group, message=mail_message, client=client)
+
+        return redirect('client_unsubscribe_ok', client_id=client.id, code=client.unsubscribe_code)
+
+
+@require_http_methods(["GET"])
+def page_client_unsubscribe_ok(request, client_id, code):
+    data = prepare_data(request)
+
+    try:
+        client = Client.objects.get(id=client_id, unsubscribe_code=code)
+    except Client.DoesNotExist as error_message:
+        messages.error(request, error_message)
+        return redirect('home')
+
+    if request.method == "GET":
+        content = {
+            'client': client,
+            'groups': Group.objects.filter(clients__in=client_id),
+        }
+
+        return render(request, "pages/page_client_unsubscribe_ok.html", {
+            'title': _("Unsubscribe"),
+            'data': data,
+            'content': content,
+        })
+    elif request.method == "POST":
+        client.is_unsubscribed = True
+        client.save()
+
+        return render(request, "pages/page_client_unsubscribe_ok.html", {
+            'title': _("Unsubscribe"),
+            'data': data,
+        })

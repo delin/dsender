@@ -12,6 +12,8 @@
         <dd>{{ content.client.date_creating|default:"<span class='muted'>---</span>" }}</dd>
         <dt>{% blocktrans %}Description{% endblocktrans %}:</dt>
         <dd><pre>{{ content.client.description|default:"<span class='muted'>---</span>" }}</pre></dd>
+        <dt>{% blocktrans %}Is unsubscribed{% endblocktrans %}:</dt>
+        <dd>{{ content.client.is_unsubscribed|yesno|title }}</dd>
     </dl>
 
     <table class="table table-condensed table-hover table-striped">

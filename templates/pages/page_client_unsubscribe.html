@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <form action="{% url 'client_unsubscribe' content.client.id content.client.unsubscribe_code %}" method="post" class="form-actions">{% csrf_token %}
+        <h3>{% blocktrans %}Are you sure you want to unsubscribe?{% endblocktrans %}</h3>
+        <button type="submit" class="btn btn-primary">{% trans "Unsubscribe" %}</button>
+    </form>
+{% endblock %}

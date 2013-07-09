@@ -31,6 +31,11 @@ urlpatterns += patterns('',
     #url(r'^client/edit/', 'main.views.page_client_edit', name='client_edit'),
     url(r'^client/(?P<client_id>\d+)/$', 'main.views.page_client_view', name='client_view'),
 
+    url(r'^client/(?P<client_id>\d+)/unsubscribe/(?P<code>[a-f0-9]{32})/$', 'main.views.page_client_unsubscribe',
+        name='client_unsubscribe'),
+    url(r'^client/(?P<client_id>\d+)/unsubscribe/(?P<code>[a-f0-9]{32})/ok/$', 'main.views.page_client_unsubscribe_ok',
+        name='client_unsubscribe_ok'),
+
     url(r'^accounts/', include('accounts.urls', namespace='accounts', app_name='accounts')),
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
