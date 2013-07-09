@@ -13,7 +13,10 @@
               <dt>{% trans "Text" %}:</dt>
               <dd>
                   {% ifequal content.mail_message.content_type "plain" %}<pre>{{ content.mail_message.text }}</pre>
-                  {% else %}{% autoescape off %}{{ content.mail_message.text }}{% endautoescape %}{% endifequal %}
+                  {% else %}
+                  <hr>
+                  {% autoescape off %}{{ content.message_text }}{% endautoescape %}{% endifequal %}
+                  <hr>
               </dd>
             </dl>
             <hr>

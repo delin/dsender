@@ -121,11 +121,24 @@ def page_confirm(request):
     c.update(csrf(request))
     data = prepare_data(request)
 
+    message_plain = get_template('messages/base.txt')
+    message_html = get_template('messages/base.html')
+
+    message_content = Context({
+        'message': message.text,
+    })
+
+    if message.content_type == "html":
+        message_text = message_html.render(message_content)
+    else:
+        message_text = message_plain.render(message_content)
+
     content = {
         'mail_message': message,
         'project': message.group.project,
         'group': message.group,
-        'to_emails': message.group.clients.all()
+        'to_emails': message.group.clients.all(),
+        'message_text': message_text,
     }
 
     return render(request, "pages/page_confirm.html", {
