@@ -264,7 +264,7 @@ def page_send(request):
 
 
 @csrf_protect
-@permission_required('is_superuser')
+@login_required
 @require_http_methods(["GET"])
 def page_logs(request):
     data = prepare_data(request)
@@ -281,7 +281,24 @@ def page_logs(request):
 
 
 @csrf_protect
-@permission_required('is_superuser')
+@login_required
+@require_http_methods(["GET"])
+def page_project_list(request):
+    data = prepare_data(request)
+
+    content = {
+        'projects': Project.objects.filter(is_removed=False)
+    }
+
+    return render(request, "pages/page_project_list.html", {
+        'title': _("Projects list"),
+        'data': data,
+        'content': content,
+    })
+
+
+@csrf_protect
+@login_required
 @require_http_methods(["GET"])
 def page_client_list(request):
     data = prepare_data(request)

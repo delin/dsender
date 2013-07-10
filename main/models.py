@@ -34,7 +34,7 @@ class Client(models.Model):
     last_name = models.CharField(verbose_name=_("Last name"), max_length=512)
     description = models.TextField(verbose_name=_("Description"), max_length=1024, blank=True, null=True)
     unsubscribe_code = models.CharField(verbose_name=_("Unsubscribe code"), max_length=32)
-    last_send = models.DateTimeField(verbose_name=_("Date of last send"), blank=True, null=True)
+    date_last_send = models.DateTimeField(verbose_name=_("Date of last send"), blank=True, null=True)
     date_creating = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
     is_unsubscribed = models.BooleanField(verbose_name=_("Is unsubscribed"), default=False)
     is_removed = models.BooleanField(verbose_name=_("Removed"), default=False)
@@ -53,6 +53,7 @@ class Project(models.Model):
     from_name = models.CharField(verbose_name=_("From name"), max_length=1024)
     from_account = models.ForeignKey(MailAccount, verbose_name=_("From account"))
     date_creating = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
+    date_last_send = models.DateTimeField(verbose_name=_("Date of last send"), blank=True, null=True)
     previous_version = models.ForeignKey('Project', verbose_name=_("Previous version"), null=True, blank=True,
                                          related_name='previous_version_project')
     is_removed = models.BooleanField(verbose_name=_("Removed"), default=False)
