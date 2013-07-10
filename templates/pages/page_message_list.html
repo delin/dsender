@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <table class="table table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{% trans "Subject" %}</th>
+                <th>{% trans "Content type" %}</th>
+                <th>{% trans "Date of creating" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in content.messages %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="#">{{ message.subject }}</a></td>
+                <td>{{ message.get_content_type_display }}</td>
+                <td>{{ message.date_creating }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -317,6 +317,23 @@ def page_group_list(request):
 @csrf_protect
 @login_required
 @require_http_methods(["GET"])
+def page_message_list(request):
+    data = prepare_data(request)
+
+    content = {
+        'messages': Message.objects.filter(is_removed=False)
+    }
+
+    return render(request, "pages/page_message_list.html", {
+        'title': _("Messages list"),
+        'data': data,
+        'content': content,
+    })
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET"])
 def page_client_list(request):
     data = prepare_data(request)
 
