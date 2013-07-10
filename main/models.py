@@ -34,6 +34,7 @@ class Client(models.Model):
     last_name = models.CharField(verbose_name=_("Last name"), max_length=512)
     description = models.TextField(verbose_name=_("Description"), max_length=1024, blank=True, null=True)
     unsubscribe_code = models.CharField(verbose_name=_("Unsubscribe code"), max_length=32)
+    last_send = models.DateTimeField(verbose_name=_("Date of last send"), blank=True, null=True)
     date_creating = models.DateTimeField(verbose_name=_("Date of creating"), auto_now_add=True)
     is_unsubscribed = models.BooleanField(verbose_name=_("Is unsubscribed"), default=False)
     is_removed = models.BooleanField(verbose_name=_("Removed"), default=False)

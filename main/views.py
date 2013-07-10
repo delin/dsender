@@ -1,3 +1,4 @@
+from datetime import datetime
 from hashlib import md5
 from django.conf import settings as global_settings
 from django.contrib import messages
@@ -198,6 +199,8 @@ def page_send(request):
         emails_array = []
         for client in clients:
             emails_array.append(client.email)
+            client.last_send = datetime.now()
+            client.save()
             Log.objects.create(action=0, user=request.user, from_account=project.from_account, from_project=project,
                                from_group=group, message=mail_message, client=client)
 
@@ -215,7 +218,6 @@ def page_send(request):
         message_html = get_template('messages/base.html')
 
         for client in clients:
-
             if 'button_send_test' in request.POST:
                 client = request.user
 
@@ -242,6 +244,8 @@ def page_send(request):
                                    from_group=group, message=mail_message)
                 break
             else:
+                client.last_send = datetime.now()
+                client.save()
                 Log.objects.create(action=0, user=request.user, from_account=project.from_account, from_project=project,
                                    from_group=group, message=mail_message, client=client)
             messages_count += 1
@@ -271,6 +275,23 @@ def page_logs(request):
 
     return render(request, "pages/page_logs_view.html", {
         'title': _("View all logs"),
+        'data': data,
+        'content': content,
+    })
+
+
+@csrf_protect
+@permission_required('is_superuser')
+@require_http_methods(["GET"])
+def page_client_list(request):
+    data = prepare_data(request)
+
+    content = {
+        'clients': Client.objects.filter(is_removed=False)
+    }
+
+    return render(request, "pages/page_client_list.html", {
+        'title': _("Clients list"),
         'data': data,
         'content': content,
     })
