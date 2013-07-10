@@ -28,7 +28,7 @@ urlpatterns += patterns('',
     url(r'^logs/all/', 'main.views.page_logs', name='logs_view'),
 
     url(r'^client/add/', 'main.views.page_client_add', name='client_add'),
-    #url(r'^client/edit/', 'main.views.page_client_edit', name='client_edit'),
+    url(r'^client/(?P<client_id>\d+)/edit/$', 'main.views.page_client_edit', name='client_edit'),
     url(r'^client/(?P<client_id>\d+)/$', 'main.views.page_client_view', name='client_view'),
 
     url(r'^client/(?P<client_id>\d+)/unsubscribe/(?P<code>[a-f0-9]{32})/$', 'main.views.page_client_unsubscribe',

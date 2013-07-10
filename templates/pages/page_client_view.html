@@ -1,21 +1,40 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
-    <dl class="dl-horizontal">
-        <dt>{% blocktrans %}First name{% endblocktrans %}:</dt>
-        <dd>{{ content.client.first_name|default:"<span class='muted'>---</span>" }}</dd>
-        <dt>{% blocktrans %}Last name{% endblocktrans %}:</dt>
-        <dd>{{ content.client.last_name|default:"<span class='muted'>---</span>" }}</dd>
-        <dt>{% blocktrans %}Email{% endblocktrans %}:</dt>
-        <dd>{{ content.client.email|default:"<span class='muted'>---</span>" }}</dd>
-        <dt>{% blocktrans %}Date of creating{% endblocktrans %}:</dt>
-        <dd>{{ content.client.date_creating|default:"<span class='muted'>---</span>" }}</dd>
-        <dt>{% blocktrans %}Description{% endblocktrans %}:</dt>
-        <dd><pre>{{ content.client.description|default:"<span class='muted'>---</span>" }}</pre></dd>
-        <dt>{% blocktrans %}Is unsubscribed{% endblocktrans %}:</dt>
-        <dd>{{ content.client.is_unsubscribed|yesno|title }}</dd>
-    </dl>
+    <div class="row-fluid">
+        <div class="span9">
+            <dl class="dl-horizontal">
+                <dt>{% blocktrans %}First name{% endblocktrans %}:</dt>
+                <dd>{{ content.client.first_name|default:"<span class='muted'>---</span>" }}</dd>
+                <dt>{% blocktrans %}Last name{% endblocktrans %}:</dt>
+                <dd>{{ content.client.last_name|default:"<span class='muted'>---</span>" }}</dd>
+                <dt>{% blocktrans %}Email{% endblocktrans %}:</dt>
+                <dd>{{ content.client.email|default:"<span class='muted'>---</span>" }}</dd>
+                <dt>{% blocktrans %}Date of creating{% endblocktrans %}:</dt>
+                <dd>{{ content.client.date_creating|default:"<span class='muted'>---</span>" }}</dd>
+                <dt>{% blocktrans %}Description{% endblocktrans %}:</dt>
+                <dd><pre>{{ content.client.description|default:"<span class='muted'>---</span>" }}</pre></dd>
+                <dt>{% blocktrans %}Is unsubscribed{% endblocktrans %}:</dt>
+                <dd>{{ content.client.is_unsubscribed|yesno|title }}</dd>
+            </dl>
+        </div>
+        <div class="span3">
+            <h5>{% trans "Actions" %}</h5>
 
+            <form action="{% url 'client_edit' content.client.id %}" method="post">{% csrf_token %}<div class="btn-group">
+                <a href="{% url 'client_edit' content.client.id %}" class="btn">{% trans "Edit" %}</a>
+                {% if content.client.is_unsubscribed %}
+                <button class="btn btn-info" name="client_edit_subscribe">{% trans "Subscribing" %}</button>
+                {% else %}
+                <button class="btn btn-warning" name="client_edit_unsubscribe">{% trans "Unsubscribing" %}</button>
+                {% endif %}
+                <button class="btn btn-danger" name="client_edit_delete">{% trans "Delete" %}</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <h5>{% blocktrans %}In groups{% endblocktrans %}</h5>
     <table class="table table-condensed table-hover table-striped">
         <thead>
             <tr>
@@ -30,6 +49,34 @@
                 <td>{{ forloop.counter }}</td>
                 <td>{{ group.project.name }}</td>
                 <td>{{ group.name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h5>{% blocktrans %}Client logs{% endblocktrans %}</h5>
+    <table class="table table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>{% trans "Action" %}</th>
+                <th>{% trans "Date and time" %}</th>
+                <th>{% trans "User" %}</th>
+                <th>{% trans "From account" %}</th>
+                <th>{% trans "From project" %}</th>
+                <th>{% trans "From group" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in content.logs %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ log.get_action_display }}</td>
+                <td>{{ log.date }}</td>
+                <td>{{ log.user.username|default:"<span class='muted'>---</span>" }}</td>
+                <td>{{ log.from_account.username|default:"<span class='muted'>---</span>" }}</td>
+                <td>{{ log.from_project.name|default:"<span class='muted'>---</span>" }}</td>
+                <td>{{ log.from_group.name|default:"<span class='muted'>---</span>" }}</td>
             </tr>
             {% endfor %}
         </tbody>

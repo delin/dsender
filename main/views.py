@@ -323,10 +323,79 @@ def page_client_view(request, client_id):
     content = {
         'client': client,
         'groups': Group.objects.filter(clients__in=client_id),
+        'logs': Log.objects.filter(client=client),
     }
 
     return render(request, "pages/page_client_view.html", {
         'title': _("View client"),
+        'data': data,
+        'content': content,
+    })
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET", "POST"])
+def page_client_edit(request, client_id):
+    data = prepare_data(request)
+
+    try:
+        client = Client.objects.get(id=client_id, is_removed=False)
+    except Client.DoesNotExist as error_message:
+        messages.error(request, error_message)
+        return redirect('home')
+
+    client_form = None
+    if request.method == "GET":
+        client_form = ClientForm(instance=client)
+    elif request.method == "POST":
+        if "client_edit_subscribe" in request.POST:
+            if client.is_unsubscribed:
+                client.is_unsubscribed = False
+                client.save()
+                Log.objects.create(action=9, user=request.user, client=client)
+                messages.success(request, _("Subscribed"))
+            else:
+                messages.warning(request, _("Client already unsubscribed"))
+        elif "client_edit_unsubscribe" in request.POST:
+            if not client.is_unsubscribed:
+                client.is_unsubscribed = True
+                client.save()
+                Log.objects.create(action=1, user=request.user, client=client)
+                messages.success(request, _("Unsubscribed"))
+            else:
+                messages.warning(request, _("Client already subscribed"))
+        elif "client_edit_delete" in request.POST:
+            if not client.is_removed:
+                client.is_removed = True
+                client.save()
+                Log.objects.create(action=10, user=request.user, client=client)
+                messages.success(request, _("Deleted"))
+                return redirect('home')
+        else:
+            client_form = ClientForm(request.POST, instance=client)
+            if client_form.is_valid():
+                # new_client = client_form.save(commit=False)
+                client_form.save(commit=False)
+                client_form.unsubscribe_code = md5(
+                    str(request.POST['email'] + str(randint(100000, 1000000))).encode()).hexdigest()
+                client_form.save()
+
+                Log.objects.create(action=4, user=request.user, client=client)
+
+                messages.success(request, _("Saved"))
+            else:
+                messages.error(request, client_form.errors)
+
+        return redirect('client_view', client_id=client_id)
+
+    content = {
+        'client_form': client_form,
+        'client': client,
+    }
+
+    return render(request, "pages/page_client_edit.html", {
+        'title': _("Edit client"),
         'data': data,
         'content': content,
     })
