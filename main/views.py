@@ -300,6 +300,23 @@ def page_project_list(request):
 @csrf_protect
 @login_required
 @require_http_methods(["GET"])
+def page_group_list(request):
+    data = prepare_data(request)
+
+    content = {
+        'groups': Group.objects.filter(is_removed=False)
+    }
+
+    return render(request, "pages/page_group_list.html", {
+        'title': _("Groups list"),
+        'data': data,
+        'content': content,
+    })
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET"])
 def page_client_list(request):
     data = prepare_data(request)
 
