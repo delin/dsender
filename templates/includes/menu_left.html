@@ -1,0 +1,16 @@
+{% load i18n %}
+<div class="well sidebar-nav">
+    <ul class="nav nav-list">
+        <li class="nav-header">{% trans "Main" %}</li>
+        <li><a href="{% url 'logs_view' %}">{% trans "View logs" %}</a></li>
+        <li class="nav-header">{% trans "Clients" %}</li>
+        <li><a href="{% url 'client_add' %}">{% trans "Add client" %}</a></li>
+        <li><a href="{% url 'client_list' %}">{% trans "Clients list" %}</a></li>
+        <li class="nav-header">{% trans "Projects" %}</li>
+        <li><a href="{% url 'project_list' %}">{% trans "Projects list" %}</a></li>
+        <li class="nav-header">{% trans "Groups" %}</li>
+        <li><a href="{% url 'group_list' %}">{% trans "Groups list" %}</a></li>
+        <li class="nav-header">{% trans "Messages" %}</li>
+        <li><a href="{% url 'message_list' %}">{% trans "Messages list" %}</a></li>
+    </ul>
+</div>
