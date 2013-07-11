@@ -15,7 +15,7 @@ from django.utils.translation import ugettext as _
 from smtplib import SMTPException
 from random import randint
 from dsender.functions import prepare_data
-from main.forms import ClientForm
+from main.forms import ClientForm, ProjectForm
 from main.models import Message, Project, Group, MailAccount, Log, Client
 
 
@@ -292,6 +292,36 @@ def page_project_list(request):
 
     return render(request, "pages/page_project_list.html", {
         'title': _("Projects list"),
+        'data': data,
+        'content': content,
+    })
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET", "POST"])
+def page_project_add(request):
+    data = prepare_data(request)
+
+    project_form = ProjectForm(request.POST or None)
+    if request.method == "POST":
+        if project_form.is_valid():
+            new_project = project_form.save()
+
+            Log.objects.create(action=5, user=request.user, from_project=new_project,
+                               from_account=new_project.from_account)
+
+            messages.success(request, _("Created"))
+            return redirect('project_add')
+        else:
+            messages.error(request, project_form.errors)
+
+    content = {
+        'project_form': project_form,
+    }
+
+    return render(request, "pages/page_project_add.html", {
+        'title': _("Add new project"),
         'data': data,
         'content': content,
     })

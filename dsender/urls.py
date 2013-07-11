@@ -28,6 +28,7 @@ urlpatterns += patterns('',
     url(r'^logs/all/', 'main.views.page_logs', name='logs_view'),
 
     url(r'^project/list/', 'main.views.page_project_list', name='project_list'),
+    url(r'^project/add/', 'main.views.page_project_add', name='project_add'),
 
     url(r'^group/list/', 'main.views.page_group_list', name='group_list'),
 

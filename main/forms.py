@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput, Textarea
-from main.models import Client
+from main.models import Client, Project
 
 __author__ = 'delin'
 
@@ -13,4 +13,16 @@ class ClientForm(ModelForm):
             'first_name': TextInput(attrs={'class': 'input-xxlarge'}),
             'last_name': TextInput(attrs={'class': 'input-xxlarge'}),
             'description': Textarea(attrs={'cols': 80, 'rows': 4, 'class': 'input-xxlarge'}),
+        }
+
+
+class ProjectForm(ModelForm):
+    class Meta:
+        model = Project
+        fields = ('name', 'description', 'from_name', 'from_account')
+        widgets = {
+            'name': TextInput(attrs={'class': 'input-xxlarge'}),
+            'description': Textarea(attrs={'cols': 80, 'rows': 4, 'class': 'input-xxlarge'}),
+            'from_name': TextInput(attrs={'class': 'input-xxlarge'}),
+            # 'from_account': TextInput(attrs={'class': 'input-xxlarge'}),
         }
