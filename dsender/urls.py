@@ -34,6 +34,7 @@ urlpatterns += patterns('',
     url(r'^group/add/', 'main.views.page_group_add', name='group_add'),
 
     url(r'^message/list/', 'main.views.page_message_list', name='message_list'),
+    url(r'^message/add/', 'main.views.page_message_add', name='message_add'),
 
     url(r'^client/list/', 'main.views.page_client_list', name='client_list'),
     url(r'^client/add/', 'main.views.page_client_add', name='client_add'),

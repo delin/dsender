@@ -1,19 +1,5 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
-    <form action="{% url 'project_add' %}" method="post" class="form-horizontal">{% csrf_token %}
-        {% for field in content.project_form %}
-        <div class="control-group">
-            <label class="control-label" for="id_{{ field.html_name }}">{{ field.label }}</label>
-            <div class="controls">
-                {{ field }}
-            </div>
-        </div>
-        {% endfor %}
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn">{% blocktrans %}Create{% endblocktrans %}</button>
-            </div>
-        </div>
-    </form>
+    {% include 'includes/model_form.html' %}
 {% endblock %}

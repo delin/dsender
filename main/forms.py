@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput, Textarea
-from main.models import Client, Project, Group
+from main.models import Client, Project, Group, Message
 
 __author__ = 'delin'
 
@@ -34,4 +34,14 @@ class GroupForm(ModelForm):
         widgets = {
             'name': TextInput(attrs={'class': 'input-xxlarge'}),
             'description': Textarea(attrs={'cols': 80, 'rows': 4, 'class': 'input-xxlarge'}),
+        }
+
+
+class MessageForm(ModelForm):
+    class Meta:
+        model = Message
+        fields = ('subject', 'text', 'content_type', 'group')
+        widgets = {
+            'name': TextInput(attrs={'class': 'input-xxlarge'}),
+            'text': Textarea(attrs={'cols': 80, 'rows': 10, 'class': 'input-xxlarge'}),
         }

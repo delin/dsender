@@ -1,0 +1,16 @@
+{% load i18n %}
+<form action="" method="post" class="form-horizontal">{% csrf_token %}
+    {% for field in content.form %}
+    <div class="control-group">
+        <label class="control-label" for="id_{{ field.html_name }}">{{ field.label }}</label>
+        <div class="controls">
+            {{ field }}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn">{% blocktrans %}Create{% endblocktrans %}</button>
+        </div>
+    </div>
+</form>

@@ -15,7 +15,7 @@ from django.utils.translation import ugettext as _
 from smtplib import SMTPException
 from random import randint
 from dsender.functions import prepare_data
-from main.forms import ClientForm, ProjectForm, GroupForm
+from main.forms import ClientForm, ProjectForm, GroupForm, MessageForm
 from main.models import Message, Project, Group, MailAccount, Log, Client
 
 
@@ -317,7 +317,7 @@ def page_project_add(request):
             messages.error(request, project_form.errors)
 
     content = {
-        'project_form': project_form,
+        'form': project_form,
     }
 
     return render(request, "pages/page_project_add.html", {
@@ -364,7 +364,7 @@ def page_group_add(request):
             messages.error(request, group_form.errors)
 
     content = {
-        'group_form': group_form,
+        'form': group_form,
     }
 
     return render(request, "pages/page_group_add.html", {
@@ -386,6 +386,36 @@ def page_message_list(request):
 
     return render(request, "pages/page_message_list.html", {
         'title': _("Messages list"),
+        'data': data,
+        'content': content,
+    })
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET", "POST"])
+def page_message_add(request):
+    data = prepare_data(request)
+
+    message_form = MessageForm(request.POST or None)
+    if request.method == "POST":
+        if message_form.is_valid():
+            new_message = message_form.save()
+
+            Log.objects.create(action=6, user=request.user, message=new_message, from_project=new_message.group.project,
+                               from_group=new_message.group, from_account=new_message.group.project.from_account)
+
+            messages.success(request, _("Created"))
+            return redirect('message_add')
+        else:
+            messages.error(request, message_form.errors)
+
+    content = {
+        'form': message_form,
+    }
+
+    return render(request, "pages/page_message_add.html", {
+        'title': _("Add new message"),
         'data': data,
         'content': content,
     })
