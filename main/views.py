@@ -15,7 +15,7 @@ from django.utils.translation import ugettext as _
 from smtplib import SMTPException
 from random import randint
 from dsender.functions import prepare_data
-from main.forms import ClientForm, ProjectForm
+from main.forms import ClientForm, ProjectForm, GroupForm
 from main.models import Message, Project, Group, MailAccount, Log, Client
 
 
@@ -339,6 +339,36 @@ def page_group_list(request):
 
     return render(request, "pages/page_group_list.html", {
         'title': _("Groups list"),
+        'data': data,
+        'content': content,
+    })
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET", "POST"])
+def page_group_add(request):
+    data = prepare_data(request)
+
+    group_form = GroupForm(request.POST or None)
+    if request.method == "POST":
+        if group_form.is_valid():
+            new_group = group_form.save()
+
+            Log.objects.create(action=12, user=request.user, from_group=new_group, from_project=new_group.project,
+                               from_account=new_group.project.from_account)
+
+            messages.success(request, _("Created"))
+            return redirect('group_add')
+        else:
+            messages.error(request, group_form.errors)
+
+    content = {
+        'group_form': group_form,
+    }
+
+    return render(request, "pages/page_group_add.html", {
+        'title': _("Add new group"),
         'data': data,
         'content': content,
     })

@@ -126,6 +126,8 @@ class Log(models.Model):
         (8, _('Send test email')),
         (9, _('Subscribed')),
         (10, _('Client deleted')),
+        (11, _('Edit group')),
+        (12, _('Add group')),
     )
 
     date = models.DateTimeField(verbose_name=_("Date and time"), auto_now_add=True)

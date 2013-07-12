@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-10 13:23+0400\n"
+"POT-Creation-Date: 2013-07-12 16:47+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,6 +70,8 @@ msgstr "Описание"
 #: main/models.py:13 main/models.py:38 main/models.py:55 main/models.py:80
 #: main/models.py:103 templates/pages/page_client_list.html:10
 #: templates/pages/page_client_view.html:13
+#: templates/pages/page_group_list.html:12
+#: templates/pages/page_message_list.html:10
 #: templates/pages/page_project_list.html:11
 #: templates/pages/page_select_group.html:15
 #: templates/pages/page_select_message.html:17
@@ -85,7 +87,7 @@ msgid "Previous version"
 msgstr "Предыдущая версия"
 
 #: main/models.py:17 main/models.py:40 main/models.py:59 main/models.py:83
-#: main/models.py:106 main/models.py:139
+#: main/models.py:106 main/models.py:141
 msgid "Removed"
 msgstr "Удалено"
 
@@ -125,15 +127,15 @@ msgstr "Дата последней отправки"
 msgid "Is unsubscribed"
 msgstr "Отписан от рассылок"
 
-#: main/models.py:43
+#: main/models.py:43 templates/includes/menu_left.html:6
 msgid "Clients"
 msgstr "Клиенты"
 
-#: main/models.py:44 main/models.py:138 templates/pages/page_logs_view.html:14
+#: main/models.py:44 main/models.py:140 templates/pages/page_logs_view.html:14
 msgid "Client"
 msgstr "Клиент"
 
-#: main/models.py:51 main/models.py:75
+#: main/models.py:51 main/models.py:75 templates/pages/page_group_list.html:8
 #: templates/pages/page_project_list.html:8
 msgid "Name"
 msgstr "Название"
@@ -142,18 +144,19 @@ msgstr "Название"
 msgid "From name"
 msgstr "От имени"
 
-#: main/models.py:54 main/models.py:134
+#: main/models.py:54 main/models.py:136
 #: templates/pages/page_client_view.html:65
 #: templates/pages/page_logs_view.html:11
 msgid "From account"
 msgstr "От аккаунта"
 
-#: main/models.py:62
+#: main/models.py:62 templates/includes/menu_left.html:9
 msgid "Projects"
 msgstr "Проекты"
 
 #: main/models.py:63 main/models.py:76
 #: templates/pages/page_client_view.html:42
+#: templates/pages/page_group_list.html:9
 #: templates/pages/page_select_group.html:9
 #: templates/pages/page_select_message.html:11
 msgid "Project"
@@ -167,15 +170,16 @@ msgstr "Копия"
 msgid "Private"
 msgstr "Личное"
 
-#: main/models.py:78 main/views.py:311 templates/includes/menu.html:20
+#: main/models.py:78 main/views.py:405 templates/includes/menu_left.html:8
 msgid "Clients list"
 msgstr "Список клиентов"
 
-#: main/models.py:79 templates/pages/page_select_message.html:28
+#: main/models.py:79 templates/pages/page_group_list.html:11
+#: templates/pages/page_select_message.html:28
 msgid "Mailing type"
 msgstr "Тип рассылки"
 
-#: main/models.py:86
+#: main/models.py:86 templates/includes/menu_left.html:12
 msgid "Groups"
 msgstr "Группы"
 
@@ -186,6 +190,7 @@ msgid "Group"
 msgstr "Группа"
 
 #: main/models.py:99 templates/pages/page_confirm.html:13
+#: templates/pages/page_message_list.html:8
 msgid "Subject"
 msgstr "Тема"
 
@@ -194,15 +199,15 @@ msgstr "Тема"
 msgid "Text"
 msgstr "Текст"
 
-#: main/models.py:101
+#: main/models.py:101 templates/pages/page_message_list.html:9
 msgid "Content type"
 msgstr "Тип письма"
 
-#: main/models.py:109
+#: main/models.py:109 templates/includes/menu_left.html:15
 msgid "Messages"
 msgstr "Сообщения"
 
-#: main/models.py:110 main/models.py:137
+#: main/models.py:110 main/models.py:139
 msgid "Message"
 msgstr "Сообщение"
 
@@ -210,7 +215,7 @@ msgstr "Сообщение"
 msgid "Send mail"
 msgstr "Отправка почты"
 
-#: main/models.py:119 main/views.py:403
+#: main/models.py:119 main/views.py:497
 msgid "Unsubscribed"
 msgstr "Отписан от рассылки"
 
@@ -222,11 +227,11 @@ msgstr "Редактирование проекта"
 msgid "Edit message"
 msgstr "Редактирование сообщения"
 
-#: main/models.py:122 main/views.py:436
+#: main/models.py:122 main/views.py:530
 msgid "Edit client"
 msgstr "Редактиросние клиента"
 
-#: main/models.py:123
+#: main/models.py:123 templates/includes/menu_left.html:10
 msgid "Add project"
 msgstr "Добавление проекта"
 
@@ -234,7 +239,7 @@ msgstr "Добавление проекта"
 msgid "Add message"
 msgstr "Добавление сообщения"
 
-#: main/models.py:125 templates/includes/menu.html:19
+#: main/models.py:125 templates/includes/menu_left.html:7
 msgid "Add client"
 msgstr "Добавление нового клиента"
 
@@ -242,7 +247,7 @@ msgstr "Добавление нового клиента"
 msgid "Send test email"
 msgstr "Отправка тестового письма"
 
-#: main/models.py:127 main/views.py:395
+#: main/models.py:127 main/views.py:489
 msgid "Subscribed"
 msgstr "Подписан на рассылку"
 
@@ -250,36 +255,44 @@ msgstr "Подписан на рассылку"
 msgid "Client deleted"
 msgstr "Клиент удалён"
 
-#: main/models.py:131 templates/pages/page_client_view.html:63
+#: main/models.py:129
+msgid "Edit group"
+msgstr "Редактировать группу"
+
+#: main/models.py:130 templates/includes/menu_left.html:13
+msgid "Add group"
+msgstr "Добавить группу"
+
+#: main/models.py:133 templates/pages/page_client_view.html:63
 #: templates/pages/page_logs_view.html:8
 msgid "Date and time"
 msgstr "Дата и время"
 
-#: main/models.py:132 templates/pages/page_client_view.html:62
+#: main/models.py:134 templates/pages/page_client_view.html:62
 #: templates/pages/page_logs_view.html:9
 msgid "Action"
 msgstr "Действие"
 
-#: main/models.py:133 templates/pages/page_client_view.html:64
+#: main/models.py:135 templates/pages/page_client_view.html:64
 #: templates/pages/page_logs_view.html:10
 msgid "User"
 msgstr "Пользователя"
 
-#: main/models.py:135 templates/pages/page_client_view.html:66
+#: main/models.py:137 templates/pages/page_client_view.html:66
 #: templates/pages/page_logs_view.html:12
 msgid "From project"
 msgstr "От проекта"
 
-#: main/models.py:136 templates/pages/page_client_view.html:67
+#: main/models.py:138 templates/pages/page_client_view.html:67
 #: templates/pages/page_logs_view.html:13
 msgid "From group"
 msgstr "От группы"
 
-#: main/models.py:142
+#: main/models.py:144
 msgid "Logs"
 msgstr "Логи"
 
-#: main/models.py:143
+#: main/models.py:145
 msgid "Log"
 msgstr "Лог"
 
@@ -327,73 +340,97 @@ msgstr "Успешно"
 msgid "View all logs"
 msgstr "Просмотр всех логов"
 
-#: main/views.py:294 templates/includes/menu.html:21
+#: main/views.py:294 templates/includes/menu_left.html:11
 #: templates/pages/page_select_project.html:10
 msgid "Projects list"
 msgstr "Список проектов"
 
-#: main/views.py:333
+#: main/views.py:314 main/views.py:361 main/views.py:427
 msgid "Created"
 msgstr "Создано"
 
-#: main/views.py:343
+#: main/views.py:324
+msgid "Add new project"
+msgstr "Добавить новый проект"
+
+#: main/views.py:341 templates/includes/menu_left.html:14
+#: templates/pages/page_select_group.html:26
+msgid "Groups list"
+msgstr "Список групп"
+
+#: main/views.py:371
+msgid "Add new group"
+msgstr "Добавить новую группу"
+
+#: main/views.py:388 templates/includes/menu_left.html:16
+#: templates/pages/page_select_message.html:34
+msgid "Messages list"
+msgstr "Список сообщений"
+
+#: main/views.py:437
 msgid "Add new client"
 msgstr "Добавление нового клиента"
 
-#: main/views.py:368
+#: main/views.py:462
 msgid "View client"
 msgstr "Подробнее о клиенте"
 
-#: main/views.py:397
+#: main/views.py:491
 msgid "Client already unsubscribed"
 msgstr "Вы уже отписаны от рассылки."
 
-#: main/views.py:405
+#: main/views.py:499
 msgid "Client already subscribed"
 msgstr "Клиент уже отписаны от рассылки."
 
-#: main/views.py:411
+#: main/views.py:505
 msgid "Deleted"
 msgstr "Удалён"
 
-#: main/views.py:424
+#: main/views.py:518
 msgid "Saved"
 msgstr "Сохранено"
 
-#: main/views.py:462 main/views.py:493 templates/messages/base.html:12
+#: main/views.py:556 main/views.py:587 templates/messages/base.html:12
 #: templates/pages/page_client_unsubscribe.html:6
 msgid "Unsubscribe"
 msgstr "Отписка от рассылки"
 
-#: main/views.py:470
+#: main/views.py:564
 msgid "You have successfully unsubscribed."
 msgstr "Вы успешно отписаны от рассылки."
 
-#: main/views.py:488
+#: main/views.py:582
 msgid "You already unsubscribed."
 msgstr "Вы уже отписаны от рассылки."
 
-#: templates/includes/menu.html:13
+#: templates/includes/menu_left.html:4
+msgid "Main"
+msgstr "Главная"
+
+#: templates/includes/menu_left.html:5
+msgid "View logs"
+msgstr "Просмотр логов"
+
+#: templates/includes/menu_top.html:13
 msgid "Logged in as"
 msgstr "Вошли как"
 
-#: templates/includes/menu.html:14
+#: templates/includes/menu_top.html:14
 msgid "logout"
 msgstr "выход"
 
-#: templates/includes/menu.html:18
+#: templates/includes/menu_top.html:18
 msgid "New mailing"
 msgstr "Новая рассылка"
-
-#: templates/includes/menu.html:22
-msgid "View logs"
-msgstr "Просмотр логов"
 
 #: templates/messages/base.html:8 templates/pages/page_home.html:5
 msgid "Hello"
 msgstr "Привет"
 
 #: templates/pages/page_client_add.html:15
+#: templates/pages/page_group_add.html:15
+#: templates/pages/page_project_add.html:15
 msgid "Create"
 msgstr "Создать"
 
@@ -456,6 +493,11 @@ msgstr "Отправить"
 msgid "Mailing list"
 msgstr "Лист рассылки"
 
+#: templates/pages/page_group_list.html:10
+#, fuzzy
+msgid "Count of clients"
+msgstr "Клиенты"
+
 #: templates/pages/page_home.html:6
 msgid "This service is used for mass mailing emails."
 msgstr "Этот сервис служит для массовой рассылке писем."
@@ -488,10 +530,6 @@ msgstr "С почты"
 msgid "After adding a new group refresh the page."
 msgstr "После добавления новой группы обновите страницу."
 
-#: templates/pages/page_select_group.html:26
-msgid "Groups list"
-msgstr "Список групп"
-
 #: templates/pages/page_select_group.html:33
 msgid "New group"
 msgstr "Новая группа"
@@ -505,10 +543,6 @@ msgstr "Далее"
 #: templates/pages/page_select_message.html:8
 msgid "After adding a new message refresh the page."
 msgstr "После добавления нового сообщения обновите страницу."
-
-#: templates/pages/page_select_message.html:34
-msgid "Messages list"
-msgstr "Список сообщений"
 
 #: templates/pages/page_select_message.html:41
 msgid "New message"
