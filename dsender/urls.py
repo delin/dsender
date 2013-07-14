@@ -33,7 +33,7 @@ urlpatterns += patterns('',
 
     url(r'^group/list/', 'main.views.page_group_list', name='group_list'),
     url(r'^group/add/', 'main.views.page_group_add', name='group_add'),
-    # url(r'^group/(?P<group_id>\d+)/$', 'main.views.page_group_view', name='group_view'),
+    url(r'^group/(?P<group_id>\d+)/$', 'main.views.page_group_view', name='group_view'),
 
     url(r'^message/list/', 'main.views.page_message_list', name='message_list'),
     url(r'^message/add/', 'main.views.page_message_add', name='message_add'),

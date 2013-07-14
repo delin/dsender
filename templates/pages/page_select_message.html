@@ -51,7 +51,7 @@
         <div class="span3 well well-small">
             <h5>{% blocktrans %}Mailing list{% endblocktrans %}:</h5>
             <ol>
-                {% include 'includes/clients_list.html' %}
+                {% include 'includes/clients_list.html' with clients=content.to_emails %}
             </ol>
         </div>
     </div>

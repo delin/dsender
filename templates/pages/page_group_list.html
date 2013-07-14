@@ -16,8 +16,8 @@
             {% for group in content.groups %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><a href="#">{{ group.name }}</a></td>
-                <td><a href="#">{{ group.project.name }}</a></td>
+                <td><a href="{% url 'group_view' group.id %}">{{ group.name }}</a></td>
+                <td><a href="{% url 'project_view' group.project.id %}">{{ group.project.name }}</a></td>
                 <td>{{ group.clients.count }}</td>
                 <td>{{ group.get_mailing_type_display }}</td>
                 <td>{{ group.date_creating }}</td>

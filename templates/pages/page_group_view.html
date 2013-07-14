@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <div class="row-fluid">
+        <div class="span9">
+            <div class="row-fluid">
+                <div class="span9">
+                    <dl class="dl-horizontal">
+                        <dt>{% blocktrans %}Name{% endblocktrans %}:</dt>
+                        <dd>{{ content.group.name|default:"<span class='muted'>---</span>" }}</dd>
+                        <dt>{% blocktrans %}Project{% endblocktrans %}:</dt>
+                        <dd><a href="{% url 'project_view' content.group.project.id %}">{{ content.group.project.name|default:"<span class='muted'>---</span>" }}</a></dd>
+                        <dt>{% blocktrans %}Mailing type{% endblocktrans %}:</dt>
+                        <dd>{{ content.group.get_mailing_type_display|default:"<span class='muted'>---</span>" }}</dd>
+                        <dt>{% blocktrans %}Date of creating{% endblocktrans %}:</dt>
+                        <dd>{{ content.group.date_creating|default:"<span class='muted'>---</span>" }}</dd>
+                        <dt>{% blocktrans %}Description{% endblocktrans %}:</dt>
+                        <dd><pre>{{ content.group.description|default:"<span class='muted'>---</span>" }}</pre></dd>
+                    </dl>
+                </div>
+                <div class="span3">
+                    <h5>{% trans "Actions" %}</h5>
+                    <form action="#" method="post">{% csrf_token %}<div class="btn-group">
+                        <a href="#" class="btn">{% trans "Edit" %}</a>
+                        <button class="btn btn-danger" name="group_edit_delete">{% trans "Delete" %}</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+
+            <h5>{% blocktrans %}Group logs{% endblocktrans %}</h5>
+            <table class="table table-condensed table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{% trans "Action" %}</th>
+                        <th>{% trans "Date and time" %}</th>
+                        <th>{% trans "User" %}</th>
+                        <th>{% trans "From account" %}</th>
+                        <th>{% trans "From group" %}</th>
+                        <th>{% trans "From group" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in content.logs %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ log.get_action_display }}</td>
+                        <td>{{ log.date }}</td>
+                        <td>{{ log.user.username|default:"<span class='muted'>---</span>" }}</td>
+                        <td>{{ log.from_account.username|default:"<span class='muted'>---</span>" }}</td>
+                        <td>{{ log.from_group.name|default:"<span class='muted'>---</span>" }}</td>
+                        <td>{{ log.from_group.name|default:"<span class='muted'>---</span>" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="span3 well well-small">
+            <h5>{% blocktrans %}Clients list{% endblocktrans %}:</h5>
+            <ol>
+                {% include 'includes/clients_list.html' with clients=content.clients %}
+            </ol>
+        </div>
+    </div>
+{% endblock %}

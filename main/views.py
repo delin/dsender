@@ -401,6 +401,31 @@ def page_group_add(request):
 @csrf_protect
 @login_required
 @require_http_methods(["GET"])
+def page_group_view(request, group_id):
+    data = prepare_data(request)
+
+    try:
+        group = Group.objects.get(id=group_id, is_removed=False)
+    except Project.DoesNotExist as error_message:
+        messages.error(request, error_message)
+        return redirect('home')
+
+    content = {
+        'group': group,
+        'clients': group.clients.all(),
+        'logs': Log.objects.filter(from_group=group),
+    }
+
+    return render(request, "pages/page_group_view.html", {
+        'title': _("View group"),
+        'data': data,
+        'content': content,
+    })
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET"])
 def page_message_list(request):
     data = prepare_data(request)
 
