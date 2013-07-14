@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-13 21:13+0400\n"
+"POT-Creation-Date: 2013-07-14 16:16+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,6 +60,7 @@ msgstr ""
 
 #: main/models.py:12 main/models.py:35 main/models.py:52 main/models.py:77
 #: templates/pages/page_client_view.html:15
+#: templates/pages/page_project_view.html:17
 #: templates/pages/page_select_group.html:12
 #: templates/pages/page_select_message.html:14
 msgid "Description"
@@ -71,6 +72,7 @@ msgstr ""
 #: templates/pages/page_group_list.html:12
 #: templates/pages/page_message_list.html:10
 #: templates/pages/page_project_list.html:11
+#: templates/pages/page_project_view.html:13
 #: templates/pages/page_select_group.html:15
 #: templates/pages/page_select_message.html:17
 msgid "Date of creating"
@@ -117,6 +119,7 @@ msgstr ""
 #: main/models.py:37 main/models.py:56
 #: templates/pages/page_client_list.html:11
 #: templates/pages/page_project_list.html:12
+#: templates/pages/page_project_view.html:15
 msgid "Date of last send"
 msgstr ""
 
@@ -135,16 +138,19 @@ msgstr ""
 
 #: main/models.py:51 main/models.py:75 templates/pages/page_group_list.html:8
 #: templates/pages/page_project_list.html:8
+#: templates/pages/page_project_view.html:7
 msgid "Name"
 msgstr ""
 
 #: main/models.py:53 templates/pages/page_project_list.html:9
+#: templates/pages/page_project_view.html:9
 msgid "From name"
 msgstr ""
 
 #: main/models.py:54 main/models.py:136
 #: templates/pages/page_client_view.html:65
 #: templates/pages/page_logs_view.html:11
+#: templates/pages/page_project_view.html:39
 msgid "From account"
 msgstr ""
 
@@ -168,7 +174,7 @@ msgstr ""
 msgid "Private"
 msgstr ""
 
-#: main/models.py:78 main/views.py:435 templates/includes/menu_left.html:8
+#: main/models.py:78 main/views.py:459 templates/includes/menu_left.html:8
 msgid "Clients list"
 msgstr ""
 
@@ -213,7 +219,7 @@ msgstr ""
 msgid "Send mail"
 msgstr ""
 
-#: main/models.py:119 main/views.py:527
+#: main/models.py:119 main/views.py:551
 msgid "Unsubscribed"
 msgstr ""
 
@@ -225,7 +231,7 @@ msgstr ""
 msgid "Edit message"
 msgstr ""
 
-#: main/models.py:122 main/views.py:560
+#: main/models.py:122 main/views.py:584
 msgid "Edit client"
 msgstr ""
 
@@ -245,7 +251,7 @@ msgstr ""
 msgid "Send test email"
 msgstr ""
 
-#: main/models.py:127 main/views.py:519
+#: main/models.py:127 main/views.py:543
 msgid "Subscribed"
 msgstr ""
 
@@ -263,26 +269,31 @@ msgstr ""
 
 #: main/models.py:133 templates/pages/page_client_view.html:63
 #: templates/pages/page_logs_view.html:8
+#: templates/pages/page_project_view.html:37
 msgid "Date and time"
 msgstr ""
 
 #: main/models.py:134 templates/pages/page_client_view.html:62
 #: templates/pages/page_logs_view.html:9
+#: templates/pages/page_project_view.html:36
 msgid "Action"
 msgstr ""
 
 #: main/models.py:135 templates/pages/page_client_view.html:64
 #: templates/pages/page_logs_view.html:10
+#: templates/pages/page_project_view.html:38
 msgid "User"
 msgstr ""
 
 #: main/models.py:137 templates/pages/page_client_view.html:66
 #: templates/pages/page_logs_view.html:12
+#: templates/pages/page_project_view.html:40
 msgid "From project"
 msgstr ""
 
 #: main/models.py:138 templates/pages/page_client_view.html:67
 #: templates/pages/page_logs_view.html:13
+#: templates/pages/page_project_view.html:41
 msgid "From group"
 msgstr ""
 
@@ -343,7 +354,7 @@ msgstr ""
 msgid "Projects list"
 msgstr ""
 
-#: main/views.py:314 main/views.py:361 main/views.py:408 main/views.py:457
+#: main/views.py:314 main/views.py:385 main/views.py:432 main/views.py:481
 msgid "Created"
 msgstr ""
 
@@ -351,58 +362,62 @@ msgstr ""
 msgid "Add new project"
 msgstr ""
 
-#: main/views.py:341 templates/includes/menu_left.html:14
+#: main/views.py:348
+msgid "View project"
+msgstr ""
+
+#: main/views.py:365 templates/includes/menu_left.html:14
 #: templates/pages/page_select_group.html:26
 msgid "Groups list"
 msgstr ""
 
-#: main/views.py:371
+#: main/views.py:395
 msgid "Add new group"
 msgstr ""
 
-#: main/views.py:388 templates/includes/menu_left.html:17
+#: main/views.py:412 templates/includes/menu_left.html:17
 #: templates/pages/page_select_message.html:34
 msgid "Messages list"
 msgstr ""
 
-#: main/views.py:418
+#: main/views.py:442
 msgid "Add new message"
 msgstr ""
 
-#: main/views.py:467
+#: main/views.py:491
 msgid "Add new client"
 msgstr ""
 
-#: main/views.py:492
+#: main/views.py:516
 msgid "View client"
 msgstr ""
 
-#: main/views.py:521
+#: main/views.py:545
 msgid "Client already unsubscribed"
 msgstr ""
 
-#: main/views.py:529
+#: main/views.py:553
 msgid "Client already subscribed"
 msgstr ""
 
-#: main/views.py:535
+#: main/views.py:559
 msgid "Deleted"
 msgstr ""
 
-#: main/views.py:548
+#: main/views.py:572
 msgid "Saved"
 msgstr ""
 
-#: main/views.py:586 main/views.py:617 templates/messages/base.html:12
+#: main/views.py:610 main/views.py:641 templates/messages/base.html:12
 #: templates/pages/page_client_unsubscribe.html:6
 msgid "Unsubscribe"
 msgstr ""
 
-#: main/views.py:594
+#: main/views.py:618
 msgid "You have successfully unsubscribed."
 msgstr ""
 
-#: main/views.py:612
+#: main/views.py:636
 msgid "You already unsubscribed."
 msgstr ""
 
@@ -467,10 +482,12 @@ msgid "Are you sure you want to unsubscribe?"
 msgstr ""
 
 #: templates/pages/page_client_view.html:22
+#: templates/pages/page_project_view.html:22
 msgid "Actions"
 msgstr ""
 
 #: templates/pages/page_client_view.html:25
+#: templates/pages/page_project_view.html:24
 msgid "Edit"
 msgstr ""
 
@@ -483,6 +500,7 @@ msgid "Unsubscribing"
 msgstr ""
 
 #: templates/pages/page_client_view.html:31
+#: templates/pages/page_project_view.html:25
 msgid "Delete"
 msgstr ""
 
@@ -542,7 +560,12 @@ msgid "Begin"
 msgstr ""
 
 #: templates/pages/page_project_list.html:10
+#: templates/pages/page_project_view.html:11
 msgid "From email"
+msgstr ""
+
+#: templates/pages/page_project_view.html:31
+msgid "Project logs"
 msgstr ""
 
 #: templates/pages/page_select_group.html:6

@@ -16,7 +16,7 @@
             {% for project in content.projects %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td><a href="#">{{ project.name }}</a></td>
+                <td><a href="{% url 'project_view' project.id %}">{{ project.name }}</a></td>
                 <td><a href="#">{{ project.from_name }}</a></td>
                 <td><a href="mailto:{{ project.from_account.username }}" target="_blank">{{ project.from_account.username }}</a></td>
                 <td>{{ project.date_creating }}</td>

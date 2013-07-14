@@ -330,6 +330,30 @@ def page_project_add(request):
 @csrf_protect
 @login_required
 @require_http_methods(["GET"])
+def page_project_view(request, project_id):
+    data = prepare_data(request)
+
+    try:
+        project = Project.objects.get(id=project_id, is_removed=False)
+    except Project.DoesNotExist as error_message:
+        messages.error(request, error_message)
+        return redirect('home')
+
+    content = {
+        'project': project,
+        'logs': Log.objects.filter(from_project=project),
+    }
+
+    return render(request, "pages/page_project_view.html", {
+        'title': _("View project"),
+        'data': data,
+        'content': content,
+    })
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET"])
 def page_group_list(request):
     data = prepare_data(request)
 

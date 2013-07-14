@@ -29,12 +29,15 @@ urlpatterns += patterns('',
 
     url(r'^project/list/', 'main.views.page_project_list', name='project_list'),
     url(r'^project/add/', 'main.views.page_project_add', name='project_add'),
+    url(r'^project/(?P<project_id>\d+)/$', 'main.views.page_project_view', name='project_view'),
 
     url(r'^group/list/', 'main.views.page_group_list', name='group_list'),
     url(r'^group/add/', 'main.views.page_group_add', name='group_add'),
+    # url(r'^group/(?P<group_id>\d+)/$', 'main.views.page_group_view', name='group_view'),
 
     url(r'^message/list/', 'main.views.page_message_list', name='message_list'),
     url(r'^message/add/', 'main.views.page_message_add', name='message_add'),
+    # url(r'^message/(?P<message_id>\d+)/$', 'main.views.page_message_view', name='message_view'),
 
     url(r'^client/list/', 'main.views.page_client_list', name='client_list'),
     url(r'^client/add/', 'main.views.page_client_add', name='client_add'),
