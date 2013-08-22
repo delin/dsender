@@ -41,6 +41,7 @@ urlpatterns += patterns('',
 
     url(r'^client/list/', 'main.views.page_client_list', name='client_list'),
     url(r'^client/add/', 'main.views.page_client_add', name='client_add'),
+    url(r'^client/mass_add/', 'main.views.page_client_mass_add', name='client_mass_add'),
     url(r'^client/(?P<client_id>\d+)/edit/$', 'main.views.page_client_edit', name='client_edit'),
     url(r'^client/(?P<client_id>\d+)/$', 'main.views.page_client_view', name='client_view'),
 

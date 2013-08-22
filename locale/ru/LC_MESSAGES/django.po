@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-22 13:44+0400\n"
+"POT-Creation-Date: 2013-08-22 15:26+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,7 +181,7 @@ msgstr "Копия"
 msgid "Private"
 msgstr "Личное"
 
-#: main/models.py:78 main/views.py:504 templates/includes/menu_left.html:8
+#: main/models.py:78 main/views.py:506 templates/includes/menu_left.html:8
 #: templates/pages/page_group_view.html:60
 msgid "Clients list"
 msgstr "Список клиентов"
@@ -228,7 +228,7 @@ msgstr "Сообщение"
 msgid "Send mail"
 msgstr "Отправка почты"
 
-#: main/models.py:119 main/views.py:596
+#: main/models.py:119 main/views.py:650
 msgid "Unsubscribed"
 msgstr "Отписан от рассылки"
 
@@ -240,7 +240,7 @@ msgstr "Редактирование проекта"
 msgid "Edit message"
 msgstr "Редактирование сообщения"
 
-#: main/models.py:122 main/views.py:629
+#: main/models.py:122 main/views.py:683
 msgid "Edit client"
 msgstr "Редактиросние клиента"
 
@@ -260,7 +260,7 @@ msgstr "Добавление нового клиента"
 msgid "Send test email"
 msgstr "Отправка тестового письма"
 
-#: main/models.py:127 main/views.py:588
+#: main/models.py:127 main/views.py:642
 msgid "Subscribed"
 msgstr "Подписан на рассылку"
 
@@ -319,139 +319,171 @@ msgstr "Логи"
 msgid "Log"
 msgstr "Лог"
 
-#: main/views.py:30
+#: main/views.py:31
 msgid "Main page"
 msgstr "Главная"
 
-#: main/views.py:42
+#: main/views.py:43
 msgid "The project list is empty."
 msgstr "Список проектов пуст."
 
-#: main/views.py:50
+#: main/views.py:51
 msgid "Select project"
 msgstr "Выбор проекта"
 
-#: main/views.py:60
+#: main/views.py:61
 msgid "Project not selected"
 msgstr "Проект не выбран"
 
-#: main/views.py:73
+#: main/views.py:74
 msgid "The group list is empty."
 msgstr "Список групп пуст."
 
-#: main/views.py:82
+#: main/views.py:83
 msgid "Select group"
 msgstr "Выбор группы"
 
-#: main/views.py:92
+#: main/views.py:93
 msgid "Group not selected"
 msgstr "Проект не выбран"
 
-#: main/views.py:103
+#: main/views.py:104
 msgid "Group not selected."
 msgstr "Группа не выбрана."
 
-#: main/views.py:110 main/views.py:143
+#: main/views.py:111 main/views.py:144
 msgid "The mailing list is empty."
 msgstr "Список рассылки пуст."
 
-#: main/views.py:121
+#: main/views.py:122
 msgid "Select message"
 msgstr "Выбор сообщения"
 
-#: main/views.py:132 main/views.py:182
+#: main/views.py:133 main/views.py:184
 msgid "Message not selected"
 msgstr "Сообщение не выбрано"
 
-#: main/views.py:171
+#: main/views.py:172
 msgid "Confirm"
 msgstr "Подтверждение"
 
-#: main/views.py:277
+#: main/views.py:279
 msgid "Successful"
 msgstr "Успешно"
 
-#: main/views.py:292
+#: main/views.py:294
 msgid "View all logs"
 msgstr "Просмотр всех логов"
 
-#: main/views.py:309 templates/includes/menu_left.html:11
+#: main/views.py:311 templates/includes/menu_left.html:11
 #: templates/pages/page_select_project.html:10
 msgid "Projects list"
 msgstr "Список проектов"
 
-#: main/views.py:329 main/views.py:405 main/views.py:477 main/views.py:526
+#: main/views.py:331 main/views.py:407 main/views.py:479 main/views.py:528
 msgid "Created"
 msgstr "Создано"
 
-#: main/views.py:339
+#: main/views.py:341
 msgid "Add new project"
 msgstr "Добавить новый проект"
 
-#: main/views.py:363
+#: main/views.py:365
 msgid "View project"
 msgstr "Просмотр проекта"
 
-#: main/views.py:380 templates/includes/menu_left.html:14
+#: main/views.py:382 templates/includes/menu_left.html:14
 #: templates/pages/page_select_group.html:26
 msgid "Groups list"
 msgstr "Список групп"
 
-#: main/views.py:394
+#: main/views.py:396
 msgid "The clients list is empty."
 msgstr "Список клиентов пуст."
 
-#: main/views.py:415
+#: main/views.py:417
 msgid "Add new group"
 msgstr "Добавить новую группу"
 
-#: main/views.py:440
+#: main/views.py:442
 msgid "View group"
 msgstr "Просмотр группы"
 
-#: main/views.py:457 templates/includes/menu_left.html:17
+#: main/views.py:459 templates/includes/menu_left.html:17
 #: templates/pages/page_select_message.html:34
 msgid "Messages list"
 msgstr "Список сообщений"
 
-#: main/views.py:487
+#: main/views.py:489
 msgid "Add new message"
 msgstr "Добавить новое сообщение"
 
-#: main/views.py:536
+#: main/views.py:538
 msgid "Add new client"
 msgstr "Добавление нового клиента"
 
-#: main/views.py:561
+#: main/views.py:573
+msgid "Email "
+msgstr "Почта "
+
+#: main/views.py:573
+msgid " already exists."
+msgstr " уже существуют."
+
+#: main/views.py:580
+msgid "Added "
+msgstr "Добавлено "
+
+#: main/views.py:580 main/views.py:582 main/views.py:584
+msgid " emails."
+msgstr " почтовых ящиков."
+
+#: main/views.py:582
+msgid "Not added, already exists "
+msgstr "не добавлено, уже существуют "
+
+#: main/views.py:584
+msgid "Not added "
+msgstr "Не добавлено "
+
+#: main/views.py:587
+msgid "Emails list is empty"
+msgstr "Список рассылки пуст"
+
+#: main/views.py:591
+msgid "Mass add new clients"
+msgstr "Массовое добавление новых клиентов"
+
+#: main/views.py:615
 msgid "View client"
 msgstr "Подробнее о клиенте"
 
-#: main/views.py:590
+#: main/views.py:644
 msgid "Client already unsubscribed"
 msgstr "Вы уже отписаны от рассылки."
 
-#: main/views.py:598
+#: main/views.py:652
 msgid "Client already subscribed"
 msgstr "Клиент уже отписаны от рассылки."
 
-#: main/views.py:604
+#: main/views.py:658
 msgid "Deleted"
 msgstr "Удалён"
 
-#: main/views.py:617
+#: main/views.py:671
 msgid "Saved"
 msgstr "Сохранено"
 
-#: main/views.py:655 main/views.py:686 templates/messages/base.html:10
+#: main/views.py:709 main/views.py:740 templates/messages/base.html:10
 #: templates/pages/page_client_unsubscribe.html:6
 msgid "Unsubscribe"
 msgstr "Отписка от рассылки"
 
-#: main/views.py:663
+#: main/views.py:717
 msgid "You have successfully unsubscribed."
 msgstr "Вы успешно отписаны от рассылки."
 
-#: main/views.py:681
+#: main/views.py:735
 msgid "You already unsubscribed."
 msgstr "Вы уже отписаны от рассылки."
 
@@ -495,9 +527,14 @@ msgid "New mailing"
 msgstr "Новая рассылка"
 
 #: templates/includes/model_form.html:13
-#: templates/pages/page_client_add.html:15
+#: templates/pages/page_client_add.html:16
+#: templates/pages/page_client_mass_add.html:13
 msgid "Create"
 msgstr "Создать"
+
+#: templates/pages/page_client_add.html:4
+msgid "Mass add emails"
+msgstr "Массовое добавление клиентов"
 
 #: templates/pages/page_client_edit.html:15
 msgid "Save"
@@ -506,6 +543,10 @@ msgstr "Сохранить"
 #: templates/pages/page_client_list.html:8
 msgid "Client name"
 msgstr "Имя клиента"
+
+#: templates/pages/page_client_mass_add.html:6
+msgid "Emails list"
+msgstr "Почтовые ящики"
 
 #: templates/pages/page_client_unsubscribe.html:5
 msgid "Are you sure you want to unsubscribe?"

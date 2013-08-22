@@ -1,16 +1,13 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
-    <a href="{% url 'client_mass_add' %}">{% blocktrans %}Mass add emails{% endblocktrans %}</a>
-    <form action="{% url 'client_add' %}" method="post" class="form-horizontal">{% csrf_token %}
-        {% for field in content.client_form %}
+    <form action="{% url 'client_mass_add' %}" method="post" class="form-horizontal">{% csrf_token %}
         <div class="control-group">
-            <label class="control-label" for="id_{{ field.html_name }}">{{ field.label }}</label>
+            <label class="control-label" for="id_emails">{% blocktrans %}Emails list{% endblocktrans %}</label>
             <div class="controls">
-                {{ field }}
+                <textarea rows="20" cols="60" class="input-xlarge" name="emails_list" id="id_emails"></textarea>
             </div>
         </div>
-        {% endfor %}
         <div class="control-group">
             <div class="controls">
                 <button type="submit" class="btn">{% blocktrans %}Create{% endblocktrans %}</button>

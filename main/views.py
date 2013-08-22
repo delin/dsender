@@ -7,6 +7,7 @@ from django.contrib.sites.models import get_current_site
 from django.core import mail
 from django.core.context_processors import csrf
 from django.core.mail import EmailMessage
+from django.core.validators import validate_email
 from django.shortcuts import redirect, render
 from django.template import Context
 from django.template.loader import get_template
@@ -16,6 +17,7 @@ from django.utils.translation import ugettext as _
 from smtplib import SMTPException
 from random import randint
 from dsender.functions import prepare_data
+from dsender.settings import DEBUG
 from main.forms import ClientForm, ProjectForm, GroupForm, MessageForm
 from main.models import Message, Project, Group, MailAccount, Log, Client
 
@@ -536,6 +538,58 @@ def page_client_add(request):
         'title': _("Add new client"),
         'data': data,
         'content': content,
+    })
+
+
+@csrf_protect
+@login_required
+@require_http_methods(["GET", "POST"])
+def page_client_mass_add(request):
+    data = prepare_data(request)
+
+    if request.method == "POST":
+        if 'emails_list' in request.POST:
+            emails = request.POST['emails_list']
+            emails_array = emails.splitlines()
+            emails_add = 0
+            emails_error = 0
+            emails_exist = 0
+            for email in emails_array:
+                if len(email) >= 3:
+                    # try:
+                    #     is_valid = validate_email(email, verify=True)
+                    # except BaseException as e:
+                    #     if DEBUG:
+                    #         messages.warning(request, e)
+                    #     return redirect(page_client_mass_add)
+
+                    # if is_valid:
+                        check_client = Client.objects.filter(email=email).count()
+                        if check_client == 0:
+                            new_client = Client.objects.create(email=email)
+                            Log.objects.create(action=7, user=request.user, client=new_client)
+                            emails_add += 1
+                        else:
+                            messages.info(request, str(_("Email ") + email + _(" already exists.")))
+                            emails_exist += 1
+                    # else:
+                    #     messages.warning(request, str(_("Email ") + email + _(" does not exist.")))
+                    #     emails_error += 1
+
+            if emails_add > 0:
+                messages.success(request, str(_("Added ") + str(emails_add) + _(" emails.")))
+            if emails_exist > 0:
+                messages.info(request, str(_("Not added, already exists ") + str(emails_exist) + _(" emails.")))
+            if emails_error > 0:
+                messages.warning(request, str(_("Not added ") + str(emails_error) + _(" emails.")))
+            return redirect(page_client_list)
+        else:
+            messages.warning(request, _("Emails list is empty"))
+            return redirect(page_client_mass_add)
+
+    return render(request, "pages/page_client_mass_add.html", {
+        'title': _("Mass add new clients"),
+        'data': data,
     })
 
 
