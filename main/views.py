@@ -577,12 +577,7 @@ def page_client_mass_add(request):
                     #     messages.warning(request, str(_("Email ") + email + _(" does not exist.")))
                     #     emails_error += 1
 
-            if emails_add > 0:
-                messages.success(request, str(_(u"Added ") + str(emails_add) + _(u" emails.")))
-            if emails_exist > 0:
-                messages.info(request, str(_(u"Not added, already exists ") + str(emails_exist) + _(u" emails.")))
-            if emails_error > 0:
-                messages.warning(request, str(_(u"Not added ") + str(emails_error) + _(u" emails.")))
+            messages.success(request, str(_(u"Emails added.")))
             return redirect(page_client_list)
         else:
             messages.warning(request, _(u"Emails list is empty"))
