@@ -566,25 +566,26 @@ def page_client_mass_add(request):
                     # if is_valid:
                         check_client = Client.objects.filter(email=email).count()
                         if check_client == 0:
-                            new_client = Client.objects.create(email=email)
+                            code = md5(str(email + str(randint(100000, 1000000))).encode()).hexdigest()
+                            new_client = Client.objects.create(email=email, unsubscribe_code=code)
                             Log.objects.create(action=7, user=request.user, client=new_client)
                             emails_add += 1
                         else:
-                            messages.info(request, str(_("Email ") + email + _(" already exists.")))
+                            messages.info(request, str(_(u"Email ") + email + _(u" already exists.")))
                             emails_exist += 1
                     # else:
                     #     messages.warning(request, str(_("Email ") + email + _(" does not exist.")))
                     #     emails_error += 1
 
             if emails_add > 0:
-                messages.success(request, str(_("Added ") + str(emails_add) + _(" emails.")))
+                messages.success(request, str(_(u"Added ") + str(emails_add) + _(u" emails.")))
             if emails_exist > 0:
-                messages.info(request, str(_("Not added, already exists ") + str(emails_exist) + _(" emails.")))
+                messages.info(request, str(_(u"Not added, already exists ") + str(emails_exist) + _(u" emails.")))
             if emails_error > 0:
-                messages.warning(request, str(_("Not added ") + str(emails_error) + _(" emails.")))
+                messages.warning(request, str(_(u"Not added ") + str(emails_error) + _(u" emails.")))
             return redirect(page_client_list)
         else:
-            messages.warning(request, _("Emails list is empty"))
+            messages.warning(request, _(u"Emails list is empty"))
             return redirect(page_client_mass_add)
 
     return render(request, "pages/page_client_mass_add.html", {
