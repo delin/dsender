@@ -27,6 +27,9 @@ class MailAccount(models.Model):
     def __str__(self):
         return u"%s" % self.username
 
+    def __unicode__(self):
+        return u"%s" % self.username
+
 
 class Client(models.Model):
     email = models.EmailField(verbose_name=_("Email"), max_length=512)
@@ -46,6 +49,9 @@ class Client(models.Model):
     def __str__(self):
         return u"%s %s <%s>" % (self.first_name, self.last_name, self.email)
 
+    def __unicode__(self):
+        return u"%s %s <%s>" % (self.first_name, self.last_name, self.email)
+
 
 class Project(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=64)
@@ -63,6 +69,9 @@ class Project(models.Model):
         verbose_name = _('Project')
 
     def __str__(self):
+        return u"%s" % self.name
+
+    def __unicode__(self):
         return u"%s" % self.name
 
 
@@ -89,6 +98,9 @@ class Group(models.Model):
     def __str__(self):
         return u"%s" % self.name
 
+    def __unicode__(self):
+        return u"%s" % self.name
+
 
 class Message(models.Model):
     CONTENT_TYPE = (
@@ -110,6 +122,9 @@ class Message(models.Model):
         verbose_name = _('Message')
 
     def __str__(self):
+        return u"%s" % self.subject
+
+    def __unicode__(self):
         return u"%s" % self.subject
 
 
@@ -146,4 +161,7 @@ class Log(models.Model):
         ordering = ['date']
 
     def __str__(self):
+        return u"%s: %s" % (self.date, self.get_action_display())
+
+    def __unicode__(self):
         return u"%s: %s" % (self.date, self.get_action_display())
