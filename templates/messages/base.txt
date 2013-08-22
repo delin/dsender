@@ -1,3 +1,1 @@
-Hello {{ client.first_name }} {{ client.last_name }}.
-
 {{ message }}

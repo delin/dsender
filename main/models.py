@@ -30,8 +30,8 @@ class MailAccount(models.Model):
 
 class Client(models.Model):
     email = models.EmailField(verbose_name=_("Email"), max_length=512)
-    first_name = models.CharField(verbose_name=_("First name"), max_length=512)
-    last_name = models.CharField(verbose_name=_("Last name"), max_length=512)
+    first_name = models.CharField(verbose_name=_("First name"), max_length=512, blank=True, null=True)
+    last_name = models.CharField(verbose_name=_("Last name"), max_length=512, blank=True, null=True)
     description = models.TextField(verbose_name=_("Description"), max_length=1024, blank=True, null=True)
     unsubscribe_code = models.CharField(verbose_name=_("Unsubscribe code"), max_length=32)
     date_last_send = models.DateTimeField(verbose_name=_("Date of last send"), blank=True, null=True)
@@ -143,6 +143,7 @@ class Log(models.Model):
     class Meta:
         verbose_name_plural = _('Logs')
         verbose_name = _('Log')
+        ordering = ['date']
 
     def __str__(self):
         return "%s: %s" % (self.date, self.get_action_display())

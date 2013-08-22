@@ -70,7 +70,7 @@
         <tbody>
             {% for log in content.logs %}
             <tr>
-                <td>{{ forloop.counter }}</td>
+                <td>{{ forloop.revcounter }}</td>
                 <td>{{ log.get_action_display }}</td>
                 <td>{{ log.date }}</td>
                 <td>{{ log.user.username|default:"<span class='muted'>---</span>" }}</td>

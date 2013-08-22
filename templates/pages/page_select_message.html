@@ -38,7 +38,7 @@
                                 <option value="{{ item.id }}">{{ item.subject }} - {{ item.date_creating }}</option>
                             {% endfor %}
                         </select>
-                        <a class="btn btn-info" target="_blank" href="/admin/main/message/add/">{% blocktrans %}New message{% endblocktrans %}</a>
+                        <a class="btn btn-info" target="_blank" href="{% url 'message_add' %}">{% blocktrans %}New message{% endblocktrans %}</a>
                     </div>
                 </div>
                 <div class="control-group">

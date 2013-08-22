@@ -14,7 +14,7 @@
                         <option value="{{ item.id }}">{{ item.name }} - {{ item.date_creating }}</option>
                     {% endfor %}
                 </select>
-                <a class="btn btn-info" target="_blank" href="/admin/main/project/add/">{% blocktrans %}New project{% endblocktrans %}</a>
+                <a class="btn btn-info" target="_blank" href="{% url 'project_add' %}">{% blocktrans %}New project{% endblocktrans %}</a>
             </div>
         </div>
         <div class="control-group">

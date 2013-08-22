@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-14 17:04+0400\n"
+"POT-Creation-Date: 2013-08-22 13:44+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -179,7 +179,7 @@ msgstr ""
 msgid "Private"
 msgstr ""
 
-#: main/models.py:78 main/views.py:484 templates/includes/menu_left.html:8
+#: main/models.py:78 main/views.py:504 templates/includes/menu_left.html:8
 #: templates/pages/page_group_view.html:60
 msgid "Clients list"
 msgstr ""
@@ -226,7 +226,7 @@ msgstr ""
 msgid "Send mail"
 msgstr ""
 
-#: main/models.py:119 main/views.py:576
+#: main/models.py:119 main/views.py:596
 msgid "Unsubscribed"
 msgstr ""
 
@@ -238,7 +238,7 @@ msgstr ""
 msgid "Edit message"
 msgstr ""
 
-#: main/models.py:122 main/views.py:609
+#: main/models.py:122 main/views.py:629
 msgid "Edit client"
 msgstr ""
 
@@ -258,7 +258,7 @@ msgstr ""
 msgid "Send test email"
 msgstr ""
 
-#: main/models.py:127 main/views.py:568
+#: main/models.py:127 main/views.py:588
 msgid "Subscribed"
 msgstr ""
 
@@ -317,123 +317,139 @@ msgstr ""
 msgid "Log"
 msgstr ""
 
-#: main/views.py:28
+#: main/views.py:30
 msgid "Main page"
 msgstr ""
 
-#: main/views.py:44
+#: main/views.py:42
+msgid "The project list is empty."
+msgstr ""
+
+#: main/views.py:50
 msgid "Select project"
 msgstr ""
 
-#: main/views.py:54
+#: main/views.py:60
 msgid "Project not selected"
 msgstr ""
 
-#: main/views.py:72
-msgid "Select group"
+#: main/views.py:73
+msgid "The group list is empty."
 msgstr ""
 
 #: main/views.py:82
+msgid "Select group"
+msgstr ""
+
+#: main/views.py:92
 msgid "Group not selected"
 msgstr ""
 
-#: main/views.py:93 main/views.py:129
+#: main/views.py:103
+msgid "Group not selected."
+msgstr ""
+
+#: main/views.py:110 main/views.py:143
 msgid "The mailing list is empty."
 msgstr ""
 
-#: main/views.py:107
+#: main/views.py:121
 msgid "Select message"
 msgstr ""
 
-#: main/views.py:118 main/views.py:168
+#: main/views.py:132 main/views.py:182
 msgid "Message not selected"
 msgstr ""
 
-#: main/views.py:157
+#: main/views.py:171
 msgid "Confirm"
 msgstr ""
 
-#: main/views.py:262
+#: main/views.py:277
 msgid "Successful"
 msgstr ""
 
-#: main/views.py:277
+#: main/views.py:292
 msgid "View all logs"
 msgstr ""
 
-#: main/views.py:294 templates/includes/menu_left.html:11
+#: main/views.py:309 templates/includes/menu_left.html:11
 #: templates/pages/page_select_project.html:10
 msgid "Projects list"
 msgstr ""
 
-#: main/views.py:314 main/views.py:385 main/views.py:457 main/views.py:506
+#: main/views.py:329 main/views.py:405 main/views.py:477 main/views.py:526
 msgid "Created"
 msgstr ""
 
-#: main/views.py:324
+#: main/views.py:339
 msgid "Add new project"
 msgstr ""
 
-#: main/views.py:348
+#: main/views.py:363
 msgid "View project"
 msgstr ""
 
-#: main/views.py:365 templates/includes/menu_left.html:14
+#: main/views.py:380 templates/includes/menu_left.html:14
 #: templates/pages/page_select_group.html:26
 msgid "Groups list"
 msgstr ""
 
-#: main/views.py:395
+#: main/views.py:394
+msgid "The clients list is empty."
+msgstr ""
+
+#: main/views.py:415
 msgid "Add new group"
 msgstr ""
 
-#: main/views.py:420
+#: main/views.py:440
 msgid "View group"
 msgstr ""
 
-#: main/views.py:437 templates/includes/menu_left.html:17
+#: main/views.py:457 templates/includes/menu_left.html:17
 #: templates/pages/page_select_message.html:34
 msgid "Messages list"
 msgstr ""
 
-#: main/views.py:467
+#: main/views.py:487
 msgid "Add new message"
 msgstr ""
 
-#: main/views.py:516
+#: main/views.py:536
 msgid "Add new client"
 msgstr ""
 
-#: main/views.py:541
+#: main/views.py:561
 msgid "View client"
 msgstr ""
 
-#: main/views.py:570
+#: main/views.py:590
 msgid "Client already unsubscribed"
 msgstr ""
 
-#: main/views.py:578
+#: main/views.py:598
 msgid "Client already subscribed"
 msgstr ""
 
-#: main/views.py:584
+#: main/views.py:604
 msgid "Deleted"
 msgstr ""
 
-#: main/views.py:597
+#: main/views.py:617
 msgid "Saved"
 msgstr ""
 
-#: main/views.py:635 main/views.py:666 templates/messages/base.html:12
+#: main/views.py:655 main/views.py:686 templates/messages/base.html:10
 #: templates/pages/page_client_unsubscribe.html:6
 msgid "Unsubscribe"
 msgstr ""
 
-#: main/views.py:643
+#: main/views.py:663
 msgid "You have successfully unsubscribed."
 msgstr ""
 
-#: main/views.py:661
+#: main/views.py:681
 msgid "You already unsubscribed."
 msgstr ""
 
@@ -479,10 +495,6 @@ msgstr ""
 #: templates/includes/model_form.html:13
 #: templates/pages/page_client_add.html:15
 msgid "Create"
-msgstr ""
-
-#: templates/messages/base.html:8 templates/pages/page_home.html:5
-msgid "Hello"
 msgstr ""
 
 #: templates/pages/page_client_edit.html:15
@@ -556,6 +568,10 @@ msgstr ""
 
 #: templates/pages/page_group_view.html:31
 msgid "Group logs"
+msgstr ""
+
+#: templates/pages/page_home.html:5
+msgid "Hello"
 msgstr ""
 
 #: templates/pages/page_home.html:6

@@ -3,6 +3,7 @@ from hashlib import md5
 from django.conf import settings as global_settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.sites.models import get_current_site
 from django.core import mail
 from django.core.context_processors import csrf
 from django.core.mail import EmailMessage
@@ -36,6 +37,10 @@ def page_select_project(request):
     data = prepare_data(request)
     projects = Project.objects.all()
 
+    if projects.count() == 0:
+        messages.warning(request, _("The project list is empty."))
+        return redirect(page_project_add)
+
     content = {
         'projects': projects,
     }
@@ -62,6 +67,10 @@ def page_select_group(request):
 
     data = prepare_data(request)
     groups = Group.objects.filter(project=project)
+
+    if groups.count() == 0:
+        messages.warning(request, _("The group list is empty."))
+        return redirect(page_group_add)
 
     content = {
         'groups': groups,
@@ -90,11 +99,15 @@ def page_select_message(request):
 
     clients = group.clients.filter(is_removed=False, is_unsubscribed=False).all()
     if not clients:
-        messages.warning(request, _("The mailing list is empty."))
+        messages.warning(request, _("Group not selected."))
         return redirect('select_group')
 
     data = prepare_data(request)
     mail_messages = Message.objects.filter(group=group)
+
+    if mail_messages.count() == 0:
+        messages.warning(request, _("The mailing list is empty."))
+        return redirect(page_message_add)
 
     content = {
         'group': group,
@@ -156,7 +169,8 @@ def page_confirm(request):
     return render(request, "pages/page_confirm.html", {
         'title': _("Confirm") + " - 4/4",
         'data': data,
-        'content': content
+        'content': content,
+        'clients': clients,
     })
 
 
@@ -224,6 +238,7 @@ def page_send(request):
             content = Context({
                 'client': client,
                 'message': mail_message.text,
+                'site': get_current_site(request),
             })
 
             if mail_message.content_type == "html":
@@ -373,6 +388,11 @@ def page_group_list(request):
 @require_http_methods(["GET", "POST"])
 def page_group_add(request):
     data = prepare_data(request)
+
+    clients_count = Client.objects.count()
+    if clients_count == 0:
+        messages.warning(request, _("The clients list is empty."))
+        return redirect(page_client_add)
 
     group_form = GroupForm(request.POST or None)
     if request.method == "POST":

@@ -15,7 +15,7 @@
         <tbody>
             {% for client in content.clients %}
             <tr>
-                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'client_view' client.id %}">{{ forloop.counter }}</a></td>
                 <td><a href="{% url 'client_view' client.id %}">{{ client.first_name }} {{ client.last_name }}</a></td>
                 <td><a href="mailto:{{ client.email }}" target="_blank">{{ client.email }}</a></td>
                 <td>{{ client.date_creating }}</td>
