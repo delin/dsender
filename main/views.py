@@ -571,7 +571,7 @@ def page_client_mass_add(request):
                             Log.objects.create(action=7, user=request.user, client=new_client)
                             emails_add += 1
                         else:
-                            messages.info(request, str(_(u"Email ") + email + _(u" already exists.")))
+                            # messages.info(request, str(_(u"Email ") + email + _(u" already exists.")))
                             emails_exist += 1
                     # else:
                     #     messages.warning(request, str(_("Email ") + email + _(" does not exist.")))
