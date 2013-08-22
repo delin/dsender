@@ -24,9 +24,6 @@ class MailAccount(models.Model):
         verbose_name_plural = _('Mail accounts')
         verbose_name = _('Mail account')
 
-    def __str__(self):
-        return u"%s" % self.username
-
     def __unicode__(self):
         return u"%s" % self.username
 
@@ -46,11 +43,8 @@ class Client(models.Model):
         verbose_name_plural = _('Clients')
         verbose_name = _('Client')
 
-    def __str__(self):
-        return u"%s %s <%s>" % (self.first_name, self.last_name, self.email)
-
     def __unicode__(self):
-        return u"%s %s <%s>" % (self.first_name, self.last_name, self.email)
+        return u"%s" % self.email
 
 
 class Project(models.Model):
@@ -67,9 +61,6 @@ class Project(models.Model):
     class Meta:
         verbose_name_plural = _('Projects')
         verbose_name = _('Project')
-
-    def __str__(self):
-        return u"%s" % self.name
 
     def __unicode__(self):
         return u"%s" % self.name
@@ -95,9 +86,6 @@ class Group(models.Model):
         verbose_name_plural = _('Groups')
         verbose_name = _('Group')
 
-    def __str__(self):
-        return u"%s" % self.name
-
     def __unicode__(self):
         return u"%s" % self.name
 
@@ -120,9 +108,6 @@ class Message(models.Model):
     class Meta:
         verbose_name_plural = _('Messages')
         verbose_name = _('Message')
-
-    def __str__(self):
-        return u"%s" % self.subject
 
     def __unicode__(self):
         return u"%s" % self.subject
@@ -159,9 +144,6 @@ class Log(models.Model):
         verbose_name_plural = _('Logs')
         verbose_name = _('Log')
         ordering = ['date']
-
-    def __str__(self):
-        return u"%s: %s" % (self.date, self.get_action_display())
 
     def __unicode__(self):
         return u"%s: %s" % (self.date, self.get_action_display())
