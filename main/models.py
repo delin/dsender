@@ -25,7 +25,7 @@ class MailAccount(models.Model):
         verbose_name = _('Mail account')
 
     def __str__(self):
-        return self.username
+        return "%s" % self.username
 
 
 class Client(models.Model):
@@ -63,7 +63,7 @@ class Project(models.Model):
         verbose_name = _('Project')
 
     def __str__(self):
-        return self.name
+        return "%s" % self.name
 
 
 class Group(models.Model):
@@ -87,7 +87,7 @@ class Group(models.Model):
         verbose_name = _('Group')
 
     def __str__(self):
-        return self.name
+        return "%s" % self.name
 
 
 class Message(models.Model):
@@ -110,7 +110,7 @@ class Message(models.Model):
         verbose_name = _('Message')
 
     def __str__(self):
-        return self.subject
+        return "%s" % self.subject
 
 
 class Log(models.Model):
